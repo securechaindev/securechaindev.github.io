@@ -1,5 +1,5 @@
 title: Secure Chain
-remote_theme: just-the-docs/just-the-docs
+remote_theme: just-the-docs/just-the-docs@v0.5.2
 logo: "/assets/images/secure-chain-logo.png"
 url: https://securechaindev.github.io
 color_scheme: light

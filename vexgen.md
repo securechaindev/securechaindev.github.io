@@ -10,6 +10,10 @@ nav_order: 3
 
 # VEXGen
 
+## Description
+
+**VEXGen** analyzes software dependencies and generates VEX documents that communicate whether known vulnerabilities are actually exploitable in a given context. It integrates data from multiple sources, including OSV.dev, SBOMs, and Git commit history.
+
 ## Purpose
 
 **VEXGen** is a tool for generating [VEX](https://www.cisa.gov/resources-tools/resources/vulnerability-exploitability-exchange-vex) (Vulnerability Exploitability eXchange) documents, which indicate whether specific vulnerabilities affect software artifacts.
@@ -23,7 +27,10 @@ It helps organizations and developers:
 
 ## Video tutorial
 
-https://github.com/user-attachments/assets/5750712e-8429-410b-b697-ce8414fe5063
+<video controls width="600">
+  <source src="https://github.com/user-attachments/assets/5750712e-8429-410b-b697-ce8414fe5063" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
 
 ## Prerequisites
 

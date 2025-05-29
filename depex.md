@@ -12,11 +12,26 @@ nav_order: 2
 
 ## Description
 
-**Depex** builds complete dependency graphs from package manifest files (`package.json`, `requirements.txt`, `pom.xml`, etc.) and enriches them with vulnerability data using Neo4j. It follows a microservices architecture including frontend, backend, MongoDB, and Neo4j.
+**Depex** builds complete dependency graphs from package manifest files (`package.json`, `requirements.txt`, `pom.xml`, etc.) and enriches them with vulnerability data using Neo4j.
+
+## Purpose
+
+**Depex** is a tool for building complete dependency graphs from package manifests and analyzing them for security risks.
+
+It helps organizations and developers:
+
+- Identify direct and transitive dependencies across multiple ecosystems (npm, pip, Maven, Cargo, etc.)
+- Enrich dependency data with known vulnerabilities
+- Visualize and explore relationships using a Neo4j graph database
+- Audit software components for supply chain security
+- Support impact analysis and decision-making during vulnerability response
 
 ## Video tutorial
 
-https://github.com/user-attachments/assets/0dbb63f4-7bc5-4e4d-81d0-94444a61e386
+<video controls width="600">
+  <source src="https://github.com/user-attachments/assets/0dbb63f4-7bc5-4e4d-81d0-94444a61e386" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
 
 ## Prerequisites
 

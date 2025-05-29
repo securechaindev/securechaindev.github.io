@@ -12,12 +12,13 @@ We provide tools to:
 
 - 📦 Analyze dependencies
 - ⚠️ Detect vulnerabilities
-- 📊 Visualize dependency graphs and generate security documents
+- 🧾 Generate security documents
+- 📊 Build and visualize dependency graphs
 
 ## Projects
 
-- [🔍 Depex](depex.md)
-- [🧾 VEXGen](vexgen.md)
+- [Depex](depex.md)
+- [VEXGen](vexgen.md)
 
 ## Contact
 
