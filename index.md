@@ -24,24 +24,8 @@ We provide tools to:
 
 [📬 Contact Us](contact.md)
 
-<button id="theme-toggle" style="position: fixed; bottom: 1rem; right: 1rem; padding: 0.5rem 1rem;">
-  Toggle Theme
-</button>
+<button class="btn js-toggle-dark-mode">Preview dark color scheme</button>
 
 <script>
-// Elements
-const toggleBtn = document.getElementById('theme-toggle');
-
-// Initialize theme from localStorage or default to light
-let theme = localStorage.getItem('theme') || 'light';
-document.documentElement.setAttribute('data-theme', theme);
-toggleBtn.textContent = theme === 'dark' ? 'Light Mode' : 'Dark Mode';
-
-// Theme toggle logic
-toggleBtn.addEventListener('click', () => {
-  theme = theme === 'dark' ? 'light' : 'dark';
-  document.documentElement.setAttribute('data-theme', theme);
-  localStorage.setItem('theme', theme);
-  toggleBtn.textContent = theme === 'dark' ? 'Light Mode' : 'Dark Mode';
-});
+  const toggleDarkMode = document.querySelector('.js-toggle-dark-mode'); jtd.addEvent(toggleDarkMode, 'click', function(){ if (jtd.getTheme() === 'dark') { jtd.setTheme('light'); toggleDarkMode.textContent = 'Preview dark color scheme'; } else { jtd.setTheme('dark'); toggleDarkMode.textContent = 'Return to the light side'; } }); 
 </script>
