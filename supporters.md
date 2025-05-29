@@ -16,7 +16,7 @@ The development of the Secure Chain tools — **Depex** and **VEXGen** — has b
 <div style="display: flex; align-items: center; gap: 1rem;">
   <img src="/assets/images/i3us-logo.png" alt="I3US Logo" width="170" />
   <a href="https://i3us.us.es/" target="_blank">Institute of Computer Engineering, University of Seville</a>
-</div
+</div>
 <p></p>
 
 Their guidance, research environment, and institutional backing have helped shape the mission of Secure Chain to advance security in the software supply chain.
