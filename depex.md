@@ -69,3 +69,16 @@ Enter [here](http://0.0.0.0:3000) for the frontend Web API.
 1. It is recommended to use a GUI such as [MongoDB Compass](https://www.mongodb.com/en/products/compass) to see what information is being indexed in vulnerability database.
 
 2. You can see the graph built [here](http://0.0.0.0:7474/browser/), using the Neo4J browser interface.
+
+<button class="btn js-toggle-dark-mode" style="
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 1000;
+">
+  🌕
+</button>
+
+<script>
+  const toggleDarkMode = document.querySelector('.js-toggle-dark-mode'); jtd.addEvent(toggleDarkMode, 'click', function(){ if (jtd.getTheme() === 'dark') { jtd.setTheme('light'); toggleDarkMode.textContent = '🌕'; } else { jtd.setTheme('dark'); toggleDarkMode.textContent = '☀️'; } }); 
+</script>
