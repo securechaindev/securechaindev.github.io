@@ -10,7 +10,7 @@ We’d love to hear from you! Whether you have a question, want to contribute, o
 
 ## 📧 Email
 
-[securechaindev@protonmail.com](mailto:securechaindev@protonmail.com)
+[securechaindev@gmail.com](mailto:securechaindev@gmail.com)
 
 ## 🌐 GitHub
 
