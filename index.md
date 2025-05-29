@@ -24,30 +24,24 @@ We provide tools to:
 
 [📬 Contact Us](contact.md)
 
-<button data-theme-toggle style="position: fixed; bottom: 1rem; right: 1rem; padding: 0.5rem 1rem;">
-  Dark Mode
+<button id="theme-toggle" style="position: fixed; bottom: 1rem; right: 1rem; padding: 0.5rem 1rem;">
+  Toggle Theme
 </button>
 
 <script>
-// Get the button
-const themeToggle = document.querySelector('[data-theme-toggle]');
+// Elements
+const toggleBtn = document.getElementById('theme-toggle');
 
-// Get the current theme from local storage or default to light
-let currentThemeSetting = localStorage.getItem('theme') || 'light';
-document.documentElement.setAttribute('data-theme', currentThemeSetting);
-themeToggle.textContent = currentThemeSetting === 'dark' ? 'Light Mode' : 'Dark Mode';
+// Initialize theme from localStorage or default to light
+let theme = localStorage.getItem('theme') || 'light';
+document.documentElement.setAttribute('data-theme', theme);
+toggleBtn.textContent = theme === 'dark' ? 'Light Mode' : 'Dark Mode';
 
-// Toggle function
-function setTheme(theme) {
-  const newTheme = theme === 'light' ? 'dark' : 'light';
-  document.documentElement.setAttribute('data-theme', newTheme);
-  localStorage.setItem('theme', newTheme);
-  themeToggle.textContent = newTheme === 'dark' ? 'Light Mode' : 'Dark Mode';
-}
-
-// Add listener
-themeToggle.addEventListener('click', () => {
-  setTheme(currentThemeSetting);
-  currentThemeSetting = currentThemeSetting === 'light' ? 'dark' : 'light';
+// Theme toggle logic
+toggleBtn.addEventListener('click', () => {
+  theme = theme === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', theme);
+  localStorage.setItem('theme', theme);
+  toggleBtn.textContent = theme === 'dark' ? 'Light Mode' : 'Dark Mode';
 });
 </script>
