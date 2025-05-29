@@ -1,4 +1,8 @@
 title: Secure Chain
-markdown: kramdown
-theme: minima
-permalink: pretty
+theme: just-the-docs
+logo: "/assets/images/secure-chain-logo.png"
+url: https://securechaindev.github.io
+color_scheme: light
+color_scheme_toggle: true
+aux_links:
+  GitHub Organization: https://github.com/securechaindev
