@@ -1,7 +1,7 @@
 ---
 title: Supporting Entities
 parent: Secure Chain
-nav_order: 5
+nav_order: 6
 ---
 
 # 🙌 Supporting Entities
