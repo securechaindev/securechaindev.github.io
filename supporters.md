@@ -22,3 +22,16 @@ The development of the Secure Chain tools — **Depex** and **VEXGen** — has b
 Their guidance, research environment, and institutional backing have helped shape the mission of Secure Chain to advance security in the software supply chain.
 
 We gratefully acknowledge their contributions.
+
+<button class="btn js-toggle-dark-mode" style="
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 1000;
+">
+  🌕
+</button>
+
+<script>
+  const toggleDarkMode = document.querySelector('.js-toggle-dark-mode'); jtd.addEvent(toggleDarkMode, 'click', function(){ if (jtd.getTheme() === 'dark') { jtd.setTheme('light'); toggleDarkMode.textContent = '🌕'; } else { jtd.setTheme('dark'); toggleDarkMode.textContent = '☀️'; } }); 
+</script>

@@ -82,3 +82,16 @@ By contributing, you agree that your contributions will be licensed under the sa
 ## 🙌 Thank You!
 
 Your contributions help improve the security of the global software supply chain. We're glad to have you with us.
+
+<button class="btn js-toggle-dark-mode" style="
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 1000;
+">
+  🌕
+</button>
+
+<script>
+  const toggleDarkMode = document.querySelector('.js-toggle-dark-mode'); jtd.addEvent(toggleDarkMode, 'click', function(){ if (jtd.getTheme() === 'dark') { jtd.setTheme('light'); toggleDarkMode.textContent = '🌕'; } else { jtd.setTheme('dark'); toggleDarkMode.textContent = '☀️'; } }); 
+</script>

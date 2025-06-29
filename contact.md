@@ -10,7 +10,7 @@ We’d love to hear from you! Whether you have a question, want to contribute, o
 
 ## 📧 Email
 
-[securechaindev@gmail.com](mailto:securechaindev@gmail.com)
+[hi@securechain.dev](mailto:hi@securechain.dev)
 
 ## 🌐 GitHub
 
