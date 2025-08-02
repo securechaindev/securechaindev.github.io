@@ -1,7 +1,7 @@
 ---
 title: Contributing
 parent: Secure Chain
-nav_order: 5
+nav_order: 4
 ---
 
 # 🤝 Contributing to SecureChain
