@@ -10,19 +10,22 @@ has_children: true
 
 We provide tools to:
 
-- 📦 Analyze dependencies
-- ⚠️ Detect vulnerabilities
-- 🧾 Generate security documents
-- 📊 Build and visualize dependency graphs
+- 📦 Analyze dependencies.
+- ⚠️ Detect vulnerabilities.
+- 🧾 Generate security documents.
+- 📊 Build and visualize dependency graphs.
 
-## Projects
+## Secure Chain Architecture
 
+**Insert an example image and explain it**
+
+## Index of Content
 - [Depex](depex.md)
 - [VEXGen](vexgen.md)
-
-## Contact
-
-[📬 Contact Us](contact.md)
+- [Local Deployment](local-deployment.md)
+- [Contributing](contributing.md)
+- [Contact Us](contact.md)
+- [Supporting Entities](supporters.md)
 
 <button class="btn js-toggle-dark-mode" style="
   position: fixed;
@@ -34,5 +37,5 @@ We provide tools to:
 </button>
 
 <script>
-  const toggleDarkMode = document.querySelector('.js-toggle-dark-mode'); jtd.addEvent(toggleDarkMode, 'click', function(){ if (jtd.getTheme() === 'dark') { jtd.setTheme('light'); toggleDarkMode.textContent = '🌕'; } else { jtd.setTheme('dark'); toggleDarkMode.textContent = '☀️'; } }); 
+  const toggleDarkMode = document.querySelector('.js-toggle-dark-mode'); jtd.addEvent(toggleDarkMode, 'click', function(){ if (jtd.getTheme() === 'dark') { jtd.setTheme('light'); toggleDarkMode.textContent = '🌕'; } else { jtd.setTheme('dark'); toggleDarkMode.textContent = '☀️'; } });
 </script>

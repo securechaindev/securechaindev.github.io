@@ -5,7 +5,7 @@ nav_order: 3
 ---
 
 <p align="center">
-  <img src="/assets/images/vexgen-logo.png" alt="VEXGen Logo" width="180"/>
+  <img src="/assets/supporters/logos/vexgen-logo.png" alt="VEXGen Logo" width="180"/>
 </p>
 
 # VEXGen
@@ -81,5 +81,5 @@ Enter [here](http://0.0.0.0:3000) for the frontend Web API.
 </button>
 
 <script>
-  const toggleDarkMode = document.querySelector('.js-toggle-dark-mode'); jtd.addEvent(toggleDarkMode, 'click', function(){ if (jtd.getTheme() === 'dark') { jtd.setTheme('light'); toggleDarkMode.textContent = '🌕'; } else { jtd.setTheme('dark'); toggleDarkMode.textContent = '☀️'; } }); 
+  const toggleDarkMode = document.querySelector('.js-toggle-dark-mode'); jtd.addEvent(toggleDarkMode, 'click', function(){ if (jtd.getTheme() === 'dark') { jtd.setTheme('light'); toggleDarkMode.textContent = '🌕'; } else { jtd.setTheme('dark'); toggleDarkMode.textContent = '☀️'; } });
 </script>
