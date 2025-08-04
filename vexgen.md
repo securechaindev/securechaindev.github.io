@@ -5,7 +5,7 @@ nav_order: 3
 ---
 
 <p align="center">
-  <img src="/assets/supporters/logos/vexgen-logo.png" alt="VEXGen Logo" width="180"/>
+  <img src="/assets/securechain/logos/vexgen-logo.png" alt="VEXGen Logo" width="180"/>
 </p>
 
 # VEXGen
