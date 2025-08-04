@@ -60,7 +60,7 @@ docker network create securechain
 
 ### 4. Databases containers
 
-For graphs and vulnerabilities information you need to download the zipped [data dumps]() from Zenodo. Once you have unzipped the dumps, inside the root folder run the command:
+For graphs and vulnerabilities information you need to download the zipped [data dumps]() from **Zenodo**. Once you have unzipped the dumps, inside the root folder run the command:
 '''bash
 docker compose up --build
 '''
