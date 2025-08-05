@@ -18,7 +18,7 @@ We provide tools to:
 ## How it works?
 
 <p align="center">
-  <img src="/assets/securechain/figs/overview.png" alt="Secure Chain Overview" width="600"/>
+  <img src="/assets/securechain/figs/overview.png" alt="Secure Chain Overview" width="1000"/>
   <p align="center"><strong>Secure Chain Architecture Overview</strong></p>
 </p>
 
