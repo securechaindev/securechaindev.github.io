@@ -39,14 +39,6 @@ The output of the system is a unified knowledge graph that represents the softwa
 
 This knowledge graph enables advanced use cases such as automated supply chain impact analysis, configurations reasoning, SBOM enrichment, VEX generation, and maintainer-level risk assessments. It provides a foundation for understanding not only which components are vulnerable, but also how and why those vulnerabilities propagate through modern software stacks.
 
-## Index of Content
-- [Depex](depex.md)
-- [VEXGen](vexgen.md)
-- [Local Deployment](local-deployment.md)
-- [Contributing](contributing.md)
-- [Contact Us](contact.md)
-- [Supporting Entities](supporters.md)
-
 <button class="btn js-toggle-dark-mode" style="
   position: fixed;
   top: 1rem;
