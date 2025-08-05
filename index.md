@@ -21,7 +21,7 @@ We provide tools to:
 
 <script>
   function updateImageForTheme() {
-    const theme = localStorage.getItem("theme");
+    const theme = document.documentElement.getAttribute("data-theme");
     const img = document.getElementById("mode-image");
     if (theme === "dark") {
       img.src = "/assets/securechain/figs/overview_dark.png";
@@ -30,9 +30,8 @@ We provide tools to:
     }
   }
   updateImageForTheme();
-  document.querySelector('.js-toggle-dark-mode')?.addEventListener('click', () => {
-    setTimeout(updateImageForTheme, 50);
-  });
+  const observer = new MutationObserver(updateImageForTheme);
+  observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
 </script>
 
 ### What it receives (Left side)
