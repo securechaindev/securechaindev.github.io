@@ -47,36 +47,28 @@ This knowledge graph enables advanced use cases such as automated supply chain i
 
 <script>
   document.addEventListener("DOMContentLoaded", function () {
-    const toggleDarkMode = document.querySelector('.js-toggle-dark-mode');
     const img = document.getElementById("mode-image");
+    const toggleDarkMode = document.querySelector('.js-toggle-dark-mode');
 
-    function updateImageForTheme() {
+    function updateImage() {
       const theme = jtd.getTheme();
       img.src = theme === 'dark'
         ? "/assets/securechain/figs/overview_dark.png"
         : "/assets/securechain/figs/overview_light.png";
     }
 
-    // Aplicar el tema guardado al cargar
-    const storedTheme = localStorage.getItem("theme");
-    if (storedTheme) {
-      jtd.setTheme(storedTheme);
-    }
-
-    // Actualizar imagen tras aplicar tema inicial
-    setTimeout(updateImageForTheme, 0);
-
     if (toggleDarkMode) {
       jtd.addEvent(toggleDarkMode, 'click', function () {
-        const currentTheme = jtd.getTheme();
-        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        const newTheme = jtd.getTheme() === 'dark' ? 'light' : 'dark';
         jtd.setTheme(newTheme);
-        localStorage.setItem("theme", newTheme);
         toggleDarkMode.textContent = newTheme === 'dark' ? '🌕' : '☀️';
 
-        // Actualizar imagen después de cambiar tema
-        setTimeout(updateImageForTheme, 10); // permitir que jtd actualice internamente
+        // Espera breve antes de cambiar la imagen
+        setTimeout(updateImage, 20);
       });
     }
+
+    // Al cargar, pon la imagen correspondiente al tema inicial
+    setTimeout(updateImage, 20);
   });
 </script>
