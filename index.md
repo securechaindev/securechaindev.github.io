@@ -17,17 +17,23 @@ We provide tools to:
 
 ## How it works?
 
-<p align="center">
-  <img src="/assets/securechain/figs/overview_light.png"
-       alt="Secure Chain Overview"
-       width="1000"
-       class="only-light" />
-  <img src="/assets/securechain/figs/overview_dark.png"
-       alt="Secure Chain Overview"
-       width="1000"
-       class="only-dark" />
-  <strong align="center">Secure Chain Architecture Overview</strong>
-</p>
+<img id="mode-image" src="/assets/securechain/figs/overview_light.png" alt="Secure Chain Overview" width="1000" />
+
+<script>
+  function updateImageForTheme() {
+    const theme = localStorage.getItem("theme");
+    const img = document.getElementById("mode-image");
+    if (theme === "dark") {
+      img.src = "/assets/securechain/figs/overview_dark.png";
+    } else {
+      img.src = "/assets/securechain/figs/overview_light.png";
+    }
+  }
+  updateImageForTheme();
+  document.querySelector('.js-toggle-dark-mode')?.addEventListener('click', () => {
+    setTimeout(updateImageForTheme, 50);
+  });
+</script>
 
 ### What it receives (Left side)
 SecureChain begins by consuming requirement files from different software ecosystems, such as *requirements.txt*, *package.json*, or *pom.xml*. These files describe the dependencies that a software project relies on, serving as the raw material for the rest of the system.
