@@ -22,10 +22,6 @@ nav_order: 2
 - Audit software components for supply chain security
 - Support impact analysis and decision-making during vulnerability response
 
-## Endpoints Specification
-
-**Explain the Depex endpoints**
-
 ## Development requirements
 
 1. [Docker](https://www.docker.com/) to deploy the tool.
@@ -95,6 +91,214 @@ The project uses Python 3.13 and the dependencies are listed in `requirements.tx
    ```bash
    pip install -r requirements.txt
    ```
+
+## Endpoints Specification
+
+### Graph endpoints
+
+<div style="border: 3px solid #ccc; padding: 10px; border-radius: 20px;">
+  <strong style="color: #00aaffff; margin: 0;">GET /graph/repositories/{user_id}</strong>
+  <p style="margin: 0;"><strong>Description:</strong> Retrieve a list of repositories for a specific user.</p>
+  <p style="margin: 0;"><strong>Path Parameters:</strong></p>
+  <ul style="margin: 0;">
+    <li style="margin: 0;"><strong>User ID:</strong> The ID of the user whose repositories to retrieve.</li>
+  </ul>
+  <p style="margin: 0;"><strong>Response:</strong> List of user repositories</p>
+</div>
+
+<br>
+
+<div style="border: 3px solid #ccc; padding: 10px; border-radius: 20px;">
+  <strong style="color: #00aaffff; margin: 0;">GET /graph/package/status</strong>
+  <p style="margin: 0;"><strong>Description:</strong> Retrieve the status of a specific package.</p>
+  <p style="margin: 0;"><strong>Query Parameters:</strong></p>
+  <ul style="margin: 0;">
+    <li style="margin: 0;"><strong>Node Type:</strong> The type of package manager node.</li>
+    <li style="margin: 0;"><strong>Package Name:</strong> The name of the package.</li>
+  </ul>
+  <p style="margin: 0;"><strong>Response:</strong> Package vulnerability status information.</p>
+</div>
+
+<br>
+
+<div style="border: 3px solid #ccc; padding: 10px; border-radius: 20px;">
+  <strong style="color: #00aaffff; margin: 0;">GET /graph/version/status</strong>
+  <p style="margin: 0;"><strong>Description:</strong> Retrieve the status of a specific version.</p>
+  <p style="margin: 0;"><strong>Query Parameters:</strong></p>
+  <ul style="margin: 0;">
+    <li style="margin: 0;"><strong>Node Type:</strong> The type of package manager node.</li>
+    <li style="margin: 0;"><strong>Package Name:</strong> The name of the package.</li>
+    <li style="margin: 0;"><strong>Version Name:</strong> The name of the version.</li>
+  </ul>
+  <p style="margin: 0;"><strong>Response:</strong> Version vulnerability status information.</p>
+</div>
+
+<br>
+
+<div style="border: 3px solid #ccc; padding: 10px; border-radius: 20px;">
+  <strong style="color: #00ff37ff; margin: 0;">POST /graph/version/init</strong>
+  <p style="margin: 0;"><strong>Description:</strong> Initialize a specific version into the graph.</p>
+  <p style="margin: 0;"><strong>Request Body:</strong></p>
+  <ul style="margin: 0;">
+    <li style="margin: 0;"><strong>Node Type:</strong> The type of package manager node.</li>
+    <li style="margin: 0;"><strong>Package Name:</strong> The name of the package.</li>
+    <li style="margin: 0;"><strong>Version Name:</strong> The name of the version.</li>
+  </ul>
+  <p style="margin: 0;"><strong>Response:</strong> Initialization of the version background extraction process.</p>
+</div>
+
+<br>
+
+<div style="border: 3px solid #ccc; padding: 10px; border-radius: 20px;">
+  <strong style="color: #00ff37ff; margin: 0;">POST /graph/package/init</strong>
+  <p style="margin: 0;"><strong>Description:</strong> Initialize a specific package into the graph.</p>
+  <p style="margin: 0;"><strong>Request Body:</strong></p>
+  <ul style="margin: 0;">
+    <li style="margin: 0;"><strong>Node Type:</strong> The type of package manager node.</li>
+    <li style="margin: 0;"><strong>Package Name:</strong> The name of the package.</li>
+  </ul>
+  <p style="margin: 0;"><strong>Response:</strong> Initialization of the package background extraction process.</p>
+</div>
+
+<br>
+
+<div style="border: 3px solid #ccc; padding: 10px; border-radius: 20px;">
+  <strong style="color: #00ff37ff; margin: 0;">POST /graph/repository/init</strong>
+  <p style="margin: 0;"><strong>Description:</strong> Initialize a specific repository into the graph.</p>
+  <p style="margin: 0;"><strong>Request Body:</strong></p>
+  <ul style="margin: 0;">
+    <li style="margin: 0;"><strong>Owner:</strong> The owner of the repository.</li>
+    <li style="margin: 0;"><strong>Name:</strong> The name of the repository.</li>
+    <li style="margin: 0;"><strong>User ID:</strong> The ID of the user initializing the repository.</li>
+  </ul>
+  <p style="margin: 0;"><strong>Response:</strong> Initialization of the repository background extraction process.</p>
+</div>
+
+### File Operations endpoints
+
+<div style="border: 3px solid #ccc; padding: 10px; border-radius: 20px;">
+  <strong style="color: #00ff37ff; margin: 0;">POST /operation/file/file_info</strong>
+  <p style="margin: 0;"><strong>Description:</strong> Retrieve information about a specific requirement file.</p>
+  <p style="margin: 0;"><strong>Request Body:</strong></p>
+  <ul style="margin: 0;">
+    <li style="margin: 0;"><strong>Requirement File ID:</strong> The ID of the requirement file where the config have been selected.</li>
+    <li style="margin: 0;"><strong>Max Level:</strong> The max level of depth in the graph.</li>
+    <li style="margin: 0;"><strong>Node Type:</strong> The type of package manager node.</li>
+  </ul>
+  <p style="margin: 0;"><strong>Response:</strong> Detailed requirement file information including direct and indirect dependencies.</p>
+</div>
+
+<br>
+
+<div style="border: 3px solid #ccc; padding: 10px; border-radius: 20px;">
+  <strong style="color: #00ff37ff; margin: 0;">POST /operation/file/valid_graph</strong>
+  <p style="margin: 0;"><strong>Description:</strong> Validate the graph of a requirement file up to a specified level.</p>
+  <p style="margin: 0;"><strong>Request Body:</strong></p>
+  <ul style="margin: 0;">
+    <li style="margin: 0;"><strong>Requirement File ID:</strong> The ID of the requirement file where the config have been selected.</li>
+    <li style="margin: 0;"><strong>Max Level:</strong> The max level of depth in the graph.</li>
+    <li style="margin: 0;"><strong>Node Type:</strong> The type of package manager node.</li>
+  </ul>
+  <p style="margin: 0;"><strong>Response:</strong> Graph validation result.</p>
+</div>
+
+<br>
+
+<div style="border: 3px solid #ccc; padding: 10px; border-radius: 20px;">
+  <strong style="color: #00ff37ff; margin: 0;">POST /operation/file/minimize_impact</strong>
+  <p style="margin: 0;"><strong>Description:</strong> Get the configurations with the minimized impact of a specific requirement file.</p>
+  <p style="margin: 0;"><strong>Request Body:</strong></p>
+  <ul style="margin: 0;">
+    <li style="margin: 0;"><strong>Requirement File ID:</strong> The ID of the requirement file where the config have been selected.</li>
+    <li style="margin: 0;"><strong>Max Level:</strong> The max level of depth in the graph.</li>
+    <li style="margin: 0;"><strong>Node Type:</strong> The type of package manager node.</li>
+    <li style="margin: 0;"><strong>Agregator:</strong> Aggragation method (tipically mean of weighted mean).</li>
+    <li style="margin: 0;"><strong>Limit:</strong> The number of configurations to return ordered by impact.</li>
+  </ul>
+  <p style="margin: 0;"><strong>Response:</strong> Minimized impact configurations.</p>
+</div>
+
+<br>
+
+<div style="border: 3px solid #ccc; padding: 10px; border-radius: 20px;">
+  <strong style="color: #00ff37ff; margin: 0;">POST /operation/file/maximize_impact</strong>
+  <p style="margin: 0;"><strong>Description:</strong> Get the configurations with the maximize impact of a specific requirement file.</p>
+  <p style="margin: 0;"><strong>Request Body:</strong></p>
+  <ul style="margin: 0;">
+    <li style="margin: 0;"><strong>Requirement File ID:</strong> The ID of the requirement file where the config have been selected.</li>
+    <li style="margin: 0;"><strong>Max Level:</strong> The max level of depth in the graph.</li>
+    <li style="margin: 0;"><strong>Node Type:</strong> The type of package manager node.</li>
+    <li style="margin: 0;"><strong>Agregator:</strong> Aggragation method (tipically mean of weighted mean).</li>
+    <li style="margin: 0;"><strong>Limit:</strong> The number of configurations to return ordered by impact.</li>
+  </ul>
+  <p style="margin: 0;"><strong>Response:</strong> Maximize impact configurations.</p>
+</div>
+
+<br>
+
+<div style="border: 3px solid #ccc; padding: 10px; border-radius: 20px;">
+  <strong style="color: #00ff37ff; margin: 0;">POST /operation/file/filter_configs</strong>
+  <p style="margin: 0;"><strong>Description:</strong> Get the filtered configurations of a specific requirement file.</p>
+  <p style="margin: 0;"><strong>Request Body:</strong></p>
+  <ul style="margin: 0;">
+    <li style="margin: 0;"><strong>Requirement File ID:</strong> The ID of the requirement file where the config have been selected.</li>
+    <li style="margin: 0;"><strong>Max Level:</strong> The max level of depth in the graph.</li>
+    <li style="margin: 0;"><strong>Node Type:</strong> The type of package manager node.</li>
+    <li style="margin: 0;"><strong>Agregator:</strong> Aggragation method (tipically mean of weighted mean).</li>
+    <li style="margin: 0;"><strong>Max Threshold:</strong> Maximum threshold for filtering between 0 and 10.</li>
+    <li style="margin: 0;"><strong>Min Threshold:</strong> Minimum threshold for filtering between 0 and 10.</li>
+    <li style="margin: 0;"><strong>Limit:</strong> The number of configurations to return ordered by impact.</li>
+  </ul>
+  <p style="margin: 0;"><strong>Response:</strong> Filtered configurations.</p>
+</div>
+
+### Configuration Operations endpoints
+
+<div style="border: 3px solid #ccc; padding: 10px; border-radius: 20px;">
+  <strong style="color: #00ff37ff; margin: 0;">POST /operation/config/valid_config</strong>
+  <p style="margin: 0;"><strong>Description:</strong> Validate the configuration based on a requirement file.</p>
+  <p style="margin: 0;"><strong>Request Body:</strong></p>
+  <ul style="margin: 0;">
+    <li style="margin: 0;"><strong>Requirement File ID:</strong> The ID of the requirement file where the config have been selected.</li>
+    <li style="margin: 0;"><strong>Max Level:</strong> The max level of depth in the graph.</li>
+    <li style="margin: 0;"><strong>Node Type:</strong> The type of package manager node.</li>
+    <li style="margin: 0;"><strong>Agregator:</strong> Aggragation method (tipically mean of weighted mean).</li>
+    <li style="margin: 0;"><strong>Config:</strong> Configuration of dependencies versions to validate.</li>
+  </ul>
+  <p style="margin: 0;"><strong>Response:</strong> Validation result or message if no dependencies found.</p>
+</div>
+
+<br>
+
+<div style="border: 3px solid #ccc; padding: 10px; border-radius: 20px;">
+  <strong style="color: #00ff37ff; margin: 0;">POST /operation/config/complete_config</strong>
+  <p style="margin: 0;"><strong>Description:</strong> Complete a partial configuration.</p>
+  <p style="margin: 0;"><strong>Request Body:</strong></p>
+  <ul style="margin: 0;">
+    <li style="margin: 0;"><strong>Requirement File ID:</strong> The ID of the requirement file where the config have been selected.</li>
+    <li style="margin: 0;"><strong>Max Level:</strong> The max level of depth in the graph.</li>
+    <li style="margin: 0;"><strong>Node Type:</strong> The type of package manager node.</li>
+    <li style="margin: 0;"><strong>Agregator:</strong> Aggragation method (tipically mean of weighted mean).</li>
+    <li style="margin: 0;"><strong>Config:</strong> Partial configuration of dependencies versions to complete.</li>
+  </ul>
+  <p style="margin: 0;"><strong>Response:</strong> Completed configuration with the min impact.</p>
+</div>
+
+<br>
+
+<div style="border: 3px solid #ccc; padding: 10px; border-radius: 20px;">
+  <strong style="color: #00ff37ff; margin: 0;">POST /operation/config/config_by_impact</strong>
+  <p style="margin: 0;"><strong>Description:</strong> Give a configuration based on impact.</p>
+  <p style="margin: 0;"><strong>Request Body:</strong></p>
+  <ul style="margin: 0;">
+    <li style="margin: 0;"><strong>Requirement File ID:</strong> The ID of the requirement file where the config have been selected.</li>
+    <li style="margin: 0;"><strong>Max Level:</strong> The max level of depth in the graph.</li>
+    <li style="margin: 0;"><strong>Node Type:</strong> The type of package manager node.</li>
+    <li style="margin: 0;"><strong>Agregator:</strong> Aggragation method (tipically mean of weighted mean).</li>
+    <li style="margin: 0;"><strong>Config:</strong> Impact criteria between 0 and 10.</li>
+  </ul>
+  <p style="margin: 0;"><strong>Response:</strong> Configuration result based on impact.</p>
+</div>
 
 ## License
 [GNU General Public License 3.0](https://www.gnu.org/licenses/gpl-3.0.html)
