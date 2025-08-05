@@ -57,18 +57,6 @@ This knowledge graph enables advanced use cases such as automated supply chain i
         : "/assets/securechain/figs/overview_light.png";
     }
 
-    if (toggleDarkMode) {
-      jtd.addEvent(toggleDarkMode, 'click', function () {
-        const newTheme = jtd.getTheme() === 'dark' ? 'light' : 'dark';
-        jtd.setTheme(newTheme);
-        toggleDarkMode.textContent = newTheme === 'dark' ? '🌕' : '☀️';
-
-        // Espera breve antes de cambiar la imagen
-        setTimeout(updateImage, 20);
-      });
-    }
-
-    // Al cargar, pon la imagen correspondiente al tema inicial
-    setTimeout(updateImage, 20);
+    const toggleDarkMode = document.querySelector('.js-toggle-dark-mode'); jtd.addEvent(toggleDarkMode, 'click', function(){ if (jtd.getTheme() === 'dark') { jtd.setTheme('light'); toggleDarkMode.textContent = '🌕'; } else { jtd.setTheme('dark'); toggleDarkMode.textContent = '☀️'; } });
   });
 </script>
