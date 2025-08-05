@@ -46,31 +46,37 @@ This knowledge graph enables advanced use cases such as automated supply chain i
 </button>
 
 <script>
-  function updateImageForTheme() {
-    const theme = jtd.getTheme();
+  document.addEventListener("DOMContentLoaded", function () {
+    const toggleDarkMode = document.querySelector('.js-toggle-dark-mode');
     const img = document.getElementById("mode-image");
-    if (theme === "dark") {
-      img.src = "/assets/securechain/figs/overview_dark.png";
-    } else {
-      img.src = "/assets/securechain/figs/overview_light.png";
-    }
-  }
 
-  // Ejecutar al cargar
-  updateImageForTheme();
-
-  // Añadir al botón toggle existente
-  const toggleDarkMode = document.querySelector('.js-toggle-dark-mode');
-  jtd.addEvent(toggleDarkMode, 'click', function () {
-    if (jtd.getTheme() === 'dark') {
-      jtd.setTheme('light');
-      toggleDarkMode.textContent = '🌕';
-    } else {
-      jtd.setTheme('dark');
-      toggleDarkMode.textContent = '☀️';
+    function updateImageForTheme() {
+      const theme = jtd.getTheme();
+      img.src = theme === 'dark'
+        ? "/assets/securechain/figs/overview_dark.png"
+        : "/assets/securechain/figs/overview_light.png";
     }
 
-    // Actualizar imagen tras cambiar el tema
-    setTimeout(updateImageForTheme, 10);
+    // Aplicar el tema guardado al cargar
+    const storedTheme = localStorage.getItem("theme");
+    if (storedTheme) {
+      jtd.setTheme(storedTheme);
+    }
+
+    // Actualizar imagen tras aplicar tema inicial
+    setTimeout(updateImageForTheme, 0);
+
+    if (toggleDarkMode) {
+      jtd.addEvent(toggleDarkMode, 'click', function () {
+        const currentTheme = jtd.getTheme();
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        jtd.setTheme(newTheme);
+        localStorage.setItem("theme", newTheme);
+        toggleDarkMode.textContent = newTheme === 'dark' ? '🌕' : '☀️';
+
+        // Actualizar imagen después de cambiar tema
+        setTimeout(updateImageForTheme, 10); // permitir que jtd actualice internamente
+      });
+    }
   });
 </script>
