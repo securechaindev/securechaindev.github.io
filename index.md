@@ -17,7 +17,7 @@ We provide tools to:
 
 ## How it works?
 
-<img id="mode-image" src="/assets/securechain/figs/overview_light.png" alt="Secure Chain Overview" width="1000" />
+<img id="mode-image" src="/assets/securechain/figs/overview_dark.png" alt="Secure Chain Overview" width="1000" />
 
 ### What it receives (Left side)
 SecureChain begins by consuming requirement files from different software ecosystems, such as *requirements.txt*, *package.json*, or *pom.xml*. These files describe the dependencies that a software project relies on, serving as the raw material for the rest of the system.
