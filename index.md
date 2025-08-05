@@ -19,21 +19,6 @@ We provide tools to:
 
 <img id="mode-image" src="/assets/securechain/figs/overview_light.png" alt="Secure Chain Overview" width="1000" />
 
-<script>
-  function updateImageForTheme() {
-    const theme = document.documentElement.getAttribute("data-theme");
-    const img = document.getElementById("mode-image");
-    if (theme === "dark") {
-      img.src = "/assets/securechain/figs/overview_dark.png";
-    } else {
-      img.src = "/assets/securechain/figs/overview_light.png";
-    }
-  }
-  updateImageForTheme();
-  const observer = new MutationObserver(updateImageForTheme);
-  observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
-</script>
-
 ### What it receives (Left side)
 SecureChain begins by consuming requirement files from different software ecosystems, such as *requirements.txt*, *package.json*, or *pom.xml*. These files describe the dependencies that a software project relies on, serving as the raw material for the rest of the system.
 
@@ -61,5 +46,25 @@ This knowledge graph enables advanced use cases such as automated supply chain i
 </button>
 
 <script>
-  const toggleDarkMode = document.querySelector('.js-toggle-dark-mode'); jtd.addEvent(toggleDarkMode, 'click', function(){ if (jtd.getTheme() === 'dark') { jtd.setTheme('light'); toggleDarkMode.textContent = '🌕'; } else { jtd.setTheme('dark'); toggleDarkMode.textContent = '☀️'; } });
+  function updateImageForTheme() {
+    const theme = jtd.getTheme();
+    const img = document.getElementById("mode-image");
+    if (theme === "dark") {
+      img.src = "/assets/securechain/figs/overview_dark.png";
+    } else {
+      img.src = "/assets/securechain/figs/overview_light.png";
+    }
+  }
+  updateImageForTheme();
+  const toggleDarkMode = document.querySelector('.js-toggle-dark-mode');
+  jtd.addEvent(toggleDarkMode, 'click', function () {
+    if (jtd.getTheme() === 'dark') {
+      jtd.setTheme('light');
+      toggleDarkMode.textContent = '🌕';
+    } else {
+      jtd.setTheme('dark');
+      toggleDarkMode.textContent = '☀️';
+    }
+    setTimeout(updateImageForTheme, 10);
+  });
 </script>
