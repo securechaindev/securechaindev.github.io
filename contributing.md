@@ -10,7 +10,7 @@ We welcome contributions from the community! Whether you're fixing bugs, improvi
 
 ## Repositories
 
-This guide applies to all repositories under the securechaindev organization. Read the README.md of the repository you're contributing to.
+This guide applies to all repositories under the [securechaindev organization](https://github.com/securechaindev). Read the README.md of the repository you're contributing to.
 
 Check open issues or create one if you're proposing something new.
 
