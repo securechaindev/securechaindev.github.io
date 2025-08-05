@@ -6,7 +6,7 @@ nav_order: 7
 
 # Supporting Entities
 
-The development of the Secure Chain tools — **Depex** and **VEXGen** — has been made possible thanks to the support of the following institutions:
+The development of the Secure Chain tools has been made possible thanks to the support of the following institutions:
 
 <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
   <img src="/assets/supporters/logos/idea-logo.png" alt="IDEA Logo" width="70" />
