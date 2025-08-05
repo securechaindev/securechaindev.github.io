@@ -19,20 +19,6 @@ We provide tools to:
 
 <img id="mode-image" src="/assets/securechain/figs/overview_dark.png" alt="Secure Chain Overview" width="1000" />
 
-<script>
-  const img = document.getElementById("mode-image");
-  function updateImage() {
-    const theme = jtd.getTheme();
-    img.src = theme === 'dark'
-      ? "/assets/securechain/figs/overview_dark.png"
-      : "/assets/securechain/figs/overview_light.png";
-  }
-  updateImage();
-  document.querySelector('.js-toggle-dark-mode')?.addEventListener('click', () => {
-    setTimeout(updateImage, 10);
-  });
-</script>
-
 ### What it receives (Left side)
 SecureChain begins by consuming requirement files from different software ecosystems, such as *requirements.txt*, *package.json*, or *pom.xml*. These files describe the dependencies that a software project relies on, serving as the raw material for the rest of the system.
 
@@ -60,5 +46,23 @@ This knowledge graph enables advanced use cases such as automated supply chain i
 </button>
 
 <script>
-  const toggleDarkMode = document.querySelector('.js-toggle-dark-mode'); jtd.addEvent(toggleDarkMode, 'click', function(){ if (jtd.getTheme() === 'dark') { jtd.setTheme('light'); toggleDarkMode.textContent = '🌕'; } else { jtd.setTheme('dark'); toggleDarkMode.textContent = '☀️'; } });
-</script>
+  // Aplicar el tema guardado al cargar la página
+  const storedTheme = localStorage.getItem("theme");
+  if (storedTheme) {
+    jtd.setTheme(storedTheme);
+  }
+
+  // Referencia al botón
+  const toggleDarkMode = document.querySelector('.js-toggle-dark-mode');
+  if (toggleDarkMode) {
+    jtd.addEvent(toggleDarkMode, 'click', function () {
+      const currentTheme = jtd.getTheme();
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+      jtd.setTheme(newTheme);
+      localStorage.setItem("theme", newTheme); // ← esto guarda la preferencia
+
+      toggleDarkMode.textContent = newTheme === 'dark' ? '🌕' : '☀️';
+    });
+  }
+</script>>
