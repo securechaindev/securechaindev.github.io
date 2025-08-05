@@ -55,6 +55,13 @@ This knowledge graph enables advanced use cases such as automated supply chain i
       jtd.setTheme('dark');
       toggleDarkMode.textContent = '☀️';
     }
+    setTimeout(() => {
+      const img = document.getElementById('mode-image');
+      const theme = jtd.getTheme();
+      img.src = theme === 'dark'
+        ? '/assets/securechain/figs/overview_dark.png'
+        : '/assets/securechain/figs/overview_light.png';
+    }, 10);
   });
   document.addEventListener("DOMContentLoaded", function () {
     const img = document.getElementById('mode-image');
