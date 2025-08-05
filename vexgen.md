@@ -82,7 +82,6 @@ Enter [here](http://0.0.0.0:3000) for the frontend Web API.
 
 <script>
   const toggleDarkMode = document.querySelector('.js-toggle-dark-mode');
-
   jtd.addEvent(toggleDarkMode, 'click', function () {
     if (jtd.getTheme() === 'dark') {
       jtd.setTheme('light');

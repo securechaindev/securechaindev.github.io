@@ -46,17 +46,21 @@ This knowledge graph enables advanced use cases such as automated supply chain i
 </button>
 
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const img = document.getElementById("mode-image");
-    const toggleDarkMode = document.querySelector('.js-toggle-dark-mode');
-
-    function updateImage() {
-      const theme = jtd.getTheme();
-      img.src = theme === 'dark'
-        ? "/assets/securechain/figs/overview_dark.png"
-        : "/assets/securechain/figs/overview_light.png";
+  const toggleDarkMode = document.querySelector('.js-toggle-dark-mode');
+  jtd.addEvent(toggleDarkMode, 'click', function () {
+    if (jtd.getTheme() === 'dark') {
+      jtd.setTheme('light');
+      toggleDarkMode.textContent = '🌕';
+    } else {
+      jtd.setTheme('dark');
+      toggleDarkMode.textContent = '☀️';
     }
-
-    const toggleDarkMode = document.querySelector('.js-toggle-dark-mode'); jtd.addEvent(toggleDarkMode, 'click', function(){ if (jtd.getTheme() === 'dark') { jtd.setTheme('light'); toggleDarkMode.textContent = '🌕'; } else { jtd.setTheme('dark'); toggleDarkMode.textContent = '☀️'; } });
+  });
+  document.addEventListener("DOMContentLoaded", function () {
+    const img = document.getElementById('mode-image');
+    const theme = jtd.getTheme();
+    img.src = theme === 'dark'
+      ? '/assets/securechain/figs/overview_dark.png'
+      : '/assets/securechain/figs/overview_light.png';
   });
 </script>
