@@ -70,3 +70,25 @@ This section presents all the scientific publications that have resulted from th
     keywords = {Security, Vulnerability, PyPI, Package, RubyGems, Cargo, NPM}
 }
 ```
+
+<button class="btn js-toggle-dark-mode" style="
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 1000;
+">
+  🌕
+</button>
+
+<script>
+  const toggleDarkMode = document.querySelector('.js-toggle-dark-mode');
+  jtd.addEvent(toggleDarkMode, 'click', function () {
+    if (jtd.getTheme() === 'dark') {
+      jtd.setTheme('light');
+      toggleDarkMode.textContent = '🌕';
+    } else {
+      jtd.setTheme('dark');
+      toggleDarkMode.textContent = '☀️';
+    }
+  });
+</script>
