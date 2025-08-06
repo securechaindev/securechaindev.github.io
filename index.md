@@ -17,7 +17,7 @@ We provide tools to:
 
 ## How it works?
 
-<img id="mode-image" src="/assets/securechain/figs/overview_light.png" alt="Secure Chain Overview" width="1000" />
+<img id="overview-image" src="/assets/securechain/figs/overview_light.png" alt="Secure Chain Overview" width="1000" />
 
 ### What it receives (Left side)
 SecureChain begins by consuming requirement files from different software ecosystems, such as *requirements.txt*, *package.json*, or *pom.xml*. These files describe the dependencies that a software project relies on, serving as the raw material for the rest of the system.
@@ -35,6 +35,20 @@ Together, Depex and VEXGen form the analytical engine of SecureChain, transformi
 The output of the system is a unified knowledge graph that represents the software supply chain and its security posture. In this graph, software packages, versions, vendors, and vulnerabilities are modeled as interconnected entities. The relationships between them are encoded explicitly to allow for querying, visualization, and reasoning.
 
 This knowledge graph enables advanced use cases such as automated supply chain impact analysis, configurations reasoning, SBOM enrichment, VEX generation, and maintainer-level risk assessments. It provides a foundation for understanding not only which components are vulnerable, but also how and why those vulnerabilities propagate through modern software stacks.
+
+## How is it made?
+
+<img id="architecture-image" src="/assets/securechain/figs/architecture_light.png" alt="Secure Chain Architecture" width="1000" />
+
+Secure Chain software architecture is based on microservices. The application is divided into several layers, each with a specific role and associated technologies that allow for independent scaling, maintenance, and development of functionalities. The layers that make up this architecture are briefly described below:
+
+1. **Frontend (Client Application):** Built with *Next.js*, this is the user-facing layer accessed through a browser or mobile device. It sends HTTP/HTTPS requests to the backend, handles user input, and displays the results dynamically.
+
+2. **API Gateway (BFF - Backend for Frontend):** Implemented with *FastAPI*, this gateway manages routes client requests to the appropriate microservice, and aggregates data when necessary.
+
+3. **Microservices Layer:** This layer consists of three separate microservices, all built with *FastAPI*. **Auth** manages authentication. **Depex** extracts and analyzes software dependencies from various package managers, and reason on dependency configurations. **VEXGen** generates vulnerability reports in VEX format.
+
+4. **Database Layer:** Each microservice uses its own dedicated database. *MongoDB* stores the vulnerability data, and *Neo4j* stores the software supply chain graph used by our tools to compute SSC degrees and analyze dependency relationships.
 
 <button class="btn js-toggle-dark-mode" style="
   position: fixed;
@@ -56,18 +70,26 @@ This knowledge graph enables advanced use cases such as automated supply chain i
       toggleDarkMode.textContent = '☀️';
     }
     setTimeout(() => {
-      const img = document.getElementById('mode-image');
+      const overview_img = document.getElementById('overview-image');
+      const architecture_img = document.getElementById('architecture-image');
       const theme = jtd.getTheme();
-      img.src = theme === 'dark'
+      overview_img.src = theme === 'dark'
         ? '/assets/securechain/figs/overview_dark.png'
         : '/assets/securechain/figs/overview_light.png';
-    }, 10);
+      architecture_img.src = theme === 'dark'
+        ? '/assets/securechain/figs/architecture_dark.png'
+        : '/assets/securechain/figs/architecture_light.png';
+    }, 5);
   });
   document.addEventListener("DOMContentLoaded", function () {
-    const img = document.getElementById('mode-image');
+    const overview_img = document.getElementById('overview-image');
+    const architecture_img = document.getElementById('architecture-image');
     const theme = jtd.getTheme();
-    img.src = theme === 'dark'
+    overview_img.src = theme === 'dark'
       ? '/assets/securechain/figs/overview_dark.png'
       : '/assets/securechain/figs/overview_light.png';
+    architecture_img.src = theme === 'dark'
+      ? '/assets/securechain/figs/architecture_dark.png'
+      : '/assets/securechain/figs/architecture_light.png';
   });
 </script>
