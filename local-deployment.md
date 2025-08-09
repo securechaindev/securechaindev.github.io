@@ -16,6 +16,7 @@ The first you need is to create an enviroment `(.env)` file from this template:
 GRAPH_DB_URI='bolt://neo4j:7687'
 VULN_DB_URI='mongodb://mongoSecureChain:mongoSecureChain@mongodb:27017/admin'
 ALLOWED_ORIGINS='["http://securechain-gateway:8000"]'
+GATEWAY_ALLOWED_ORIGINS='["http://localhost:3000"]' # Change in production
 
 # Databases settings
 GRAPH_DB_USER='neo4j'
@@ -24,6 +25,7 @@ VULN_DB_USER='mongoSecureChain'
 VULN_DB_PASSWORD='mongoSecureChain'
 
 # Secrets for JWT
+SECURE='FALSE' # Set to True in production
 ALGORITHM='your_preferred_algorithm'  # e.g., 'HS256'
 ACCESS_TOKEN_EXPIRE_MINUTES='access_token_expire_minutes'
 REFRESH_TOKEN_EXPIRE_DAYS='refresh_token_expire_days'
