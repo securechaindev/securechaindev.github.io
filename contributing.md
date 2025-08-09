@@ -16,31 +16,36 @@ Check open issues or create one if you're proposing something new.
 
 ##  How to Contribute
 
-1. Fork & Clone
+### 1. Fork & Clone
+
 Click the Fork button on GitHub and clone your copy:
 ```bash
 git clone https://github.com/your-username/tool-name.git
 ```
 
-2. Create a Branch
+### 2. Create a Branch
+
 Use a descriptive name:
 ```bash
 git checkout -b fix/missing-dependency-warning
 ```
 
-3. Make Changes
+### 3. Make Changes
+
 Focus on clarity and modularity. Each repository have a deployment guide in README.md to check your changes, but typically is running the command:
 ```bash
 docker compose -f dev/docker-compose.yml up --build
 ```
 
-4. Lint
+### 4. Lint
+
 The repositories support using **ruff** following PEP8 with command:
 ```bash
 ruff check app --fix
 ```
 
-6. Run Tests
+### 5. Run Tests
+
 If the repository have a test folder you can install the test requirements with command:
 ```bash
 pip install -r tests/dev-requirement.txt
@@ -51,13 +56,15 @@ Then, you can run the tests with command
 pytest tests/
 ```
 
-7. Commit Changes
-Follow conventional commits when possible:
+### 6. Commit Changes
+
+Follow [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) when possible:
 ```bash
 git commit -m "fix: Warn on missing indirect imports"
 ```
 
-8. Push & Open Pull Request
+### 7. Push & Open Pull Request
+
 Once you have linted and tested your code you can push your changes:
 ```bash
 git push origin fix/missing-dependency-warning
