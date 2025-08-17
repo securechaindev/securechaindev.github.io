@@ -6,7 +6,7 @@ nav_order: 4
 
 # Local Deployment
 
-You can try **Secure Chain** tools in your local machine following the next steps.
+You can try **Secure Chain** tools backends in your local machine following the next steps.
 
 ## Enviroment File
 

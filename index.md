@@ -42,7 +42,7 @@ This knowledge graph enables advanced use cases such as automated supply chain i
 
 Secure Chain software architecture is based on microservices. The application is divided into several layers, each with a specific role and associated technologies that allow for independent scaling, maintenance, and development of functionalities. The layers that make up this architecture are briefly described below:
 
-1. **Frontend (Client Application):** Built with *Next.js*, this is the user-facing layer accessed through a browser or mobile device. It sends HTTP/HTTPS requests to the backend, handles user input, and displays the results dynamically.
+1. **Frontend (Client Application):** Built with *Next.js*, and served statically with *Nginx*, this is the user-facing layer accessed through a browser or mobile device. It sends HTTP/HTTPS requests to the backend, handles user input, and displays the results dynamically.
 
 2. **API Gateway (BFF - Backend for Frontend):** Implemented with *FastAPI*, this gateway manages routes client requests to the appropriate microservice, and aggregates data when necessary.
 
