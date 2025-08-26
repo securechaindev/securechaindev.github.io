@@ -10,66 +10,171 @@ nav_order: 3
 
 # VEXGen
 
-## Description
+## What is VEXGen?
 
-**VEXGen** analyzes software dependencies and generates VEX documents that communicate whether known vulnerabilities are actually exploitable in a given context. It integrates data from multiple sources, including OSV.dev, SBOMs, and Git commit history.
+VEXGen is a simple generating tool of Vulnerability Exploitability eXchange (VEX) and Thread Intelligence eXchange (TIX) files.
 
-## Purpose
-
-**VEXGen** is a tool for generating [VEX](https://www.cisa.gov/resources-tools/resources/vulnerability-exploitability-exchange-vex) (Vulnerability Exploitability eXchange) documents, which indicate whether specific vulnerabilities affect software artifacts.
-
-It helps organizations and developers:
-
-- Track and analyze vulnerabilities in dependencies
-- Communicate exploitability status via VEX
-- Store and visualize data using dependency graphs and SBOMs
-- Integrate vulnerability data from OSV.dev and Git
-
-## Video tutorial
-
-<video controls width="600">
-  <source src="https://github.com/user-attachments/assets/5750712e-8429-410b-b697-ce8414fe5063" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
-
-## Prerequisites
-
-Before deploying VEXGen, ensure the following are installed:
-
-- Docker
-- Git
-- Git LFS (Git Large File Storage)
-
-## Deployment requirements
+## Development requirements
 
 1. [Docker](https://www.docker.com/) to deploy the tool.
-
-2. [Git Large Files Storage](https://git-lfs.com/) (git-lfs) for cloning correctly the seeds of the repository.
+2. [Docker Compose](https://docs.docker.com/compose/) for container orchestration.
+3. It is recommended to use a GUI such as [MongoDB Compass](https://www.mongodb.com/en/products/compass).
+4. The Neo4J browser interface to visualize the graph built from the data is in [localhost:7474](http://0.0.0.0:7474/browser/) when the container is running.
+5. Python 3.13 or higher.
 
 ## Deployment with docker
 
-### Step 1
- Create a .env file from template.env
+### 1. Clone the repository
+Clone the repository from the official GitHub repository:
+```bash
+git clone https://github.com/securechaindev/securechain-vexgen.git
+cd securechain-vexgen
+```
+
+### 2. Configure environment variables
+Create a `.env` file from the `template.env` file and place it in the `app/` directory.
 
 #### Get API Keys
 
-- How to get a GitHub [API key](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens).
+- How to get a *GitHub* [API key](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens).
 
-- Modify the **Json Web Token (JWT)** secret key with your own. You can generate your own with the command **node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"**.
+- Modify the **Json Web Token (JWT)** secret key and algorithm with your own. You can generate your own secret key with the command **openssl rand -base64 32**.
 
-### Step 2
-Create the **graphs** folder inside the **seeds** folder in the root of the project, download the graphs seed from this [link](https://goo.su/YjuzmQ), and insert it into the **graphs** folder.
+### 3. Create Docker network
+Ensure you have the `securechain` Docker network created. If not, create it with:
+```bash
+docker network create securechain
+```
 
-### Step 3
-Run command *docker compose up --build*.
+### 4. Databases containers
 
-### Step 4
-Enter [here](http://0.0.0.0:3000) for the frontend Web API.
+For graphs and vulnerabilities information you need to download the zipped [data dumps]() from Zenodo. Once you have unzipped the dumps, inside the root folder run the command:
+```bash
+docker compose up --build
+```
 
-#### Other tools
-1. It is recommended to use a GUI such as [MongoDB Compass](https://www.mongodb.com/en/products/compass) to see what information is being indexed in vulnerability database
+The containerized databases will also be seeded automatically.
 
-2. You can see the created graph built for [here](http://0.0.0.0:7474/browser/), using the Neo4J browser interfaces.
+### 5. Start the application
+Run the command from the project root:
+```bash
+docker compose -f dev/docker-compose.yml up --build
+```
+
+### 6. Access the application
+The API will be available at [http://localhost:8002](http://localhost:8002). You can access the API documentation at [http://localhost:8002/docs](http://localhost:8002/docs). Also, in [http://localhost:8001/docs](http://localhost:8001/docs) you can access the auth API documetation.
+
+## Python Environment
+The project uses Python 3.13 and the dependencies are listed in `requirements.txt`.
+
+### Setting up the development environment
+
+1. **Create a virtual environment**:
+   ```bash
+   python3.13 -m venv vexgen-env
+   ```
+
+2. **Activate the virtual environment**:
+   ```bash
+   source vexgen-env/bin/activate
+   ```
+
+3. **Install dependencies**:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+## Endpoints Specification
+
+### Vulnerability Exploitybility eXchange (VEX) endpoints
+
+<div style="border: 3px solid #ccc; padding: 10px; border-radius: 20px;">
+  <strong style="color: #00aaffff; margin: 0;">GET /vex/user/{user_id}</strong>
+  <p style="margin: 0;"><strong>Description:</strong> Fetches all VEX documents associated with a specific user.</p>
+  <p style="margin: 0;"><strong>Path Parameters:</strong></p>
+  <ul style="margin: 0;">
+    <li style="margin: 0;"><strong>User ID:</strong> The ID of the user whose VEX documents to retrieve.</li>
+  </ul>
+  <p style="margin: 0;"><strong>Response:</strong> List of VEX documents with metadata and JSON content.</p>
+</div>
+
+<br>
+
+<div style="border: 3px solid #ccc; padding: 10px; border-radius: 20px;">
+  <strong style="color: #00aaffff; margin: 0;">GET /vex/show/{vex_id}</strong>
+  <p style="margin: 0;"><strong>Description:</strong> Fetches a specific VEX document by its ID.</p>
+  <p style="margin: 0;"><strong>Path Parameters:</strong></p>
+  <ul style="margin: 0;">
+    <li style="margin: 0;"><strong>VEX ID:</strong> The ID of the VEX document to retrieve.</li>
+  </ul>
+  <p style="margin: 0;"><strong>Response:</strong> VEX document metadata and content in JSON format.</p>
+</div>
+
+<br>
+
+<div style="border: 3px solid #ccc; padding: 10px; border-radius: 20px;">
+  <strong style="color: #00ff37ff; margin: 0;">POST /vex/download</strong>
+  <p style="margin: 0;"><strong>Description:</strong> Downloads a VEX document as a ZIP file using a specific VEX ID.</p>
+  <p style="margin: 0;"><strong>Request Body:</strong></p>
+  <ul style="margin: 0;">
+    <li style="margin: 0;"><strong>vex_id:</strong> The ID of the VEX document to download.</li>
+  </ul>
+  <p style="margin: 0;"><strong>Response:</strong> A downloadable ZIP file containing the VEX document.</p>
+</div>
+
+### Thread Intelligence eXchange (TIX) endpoints
+
+<div style="border: 3px solid #ccc; padding: 10px; border-radius: 20px;">
+  <strong style="color: #00aaffff; margin: 0;">GET /tix/user/{user_id}</strong>
+  <p style="margin: 0;"><strong>Description:</strong> Fetches all TIX documents associated with a specific user.</p>
+  <p style="margin: 0;"><strong>Path Parameters:</strong></p>
+  <ul style="margin: 0;">
+    <li style="margin: 0;"><strong>User ID:</strong> The ID of the user whose TIX documents to retrieve.</li>
+  </ul>
+  <p style="margin: 0;"><strong>Response:</strong> List of TIX documents with metadata and JSON content.</p>
+</div>
+
+<br>
+
+<div style="border: 3px solid #ccc; padding: 10px; border-radius: 20px;">
+  <strong style="color: #00aaffff; margin: 0;">GET /tix/show/{tix_id}</strong>
+  <p style="margin: 0;"><strong>Description:</strong> Fetches a specific TIX document by its ID.</p>
+  <p style="margin: 0;"><strong>Path Parameters:</strong></p>
+  <ul style="margin: 0;">
+    <li style="margin: 0;"><strong>TIX ID:</strong> The ID of the TIX document to retrieve.</li>
+  </ul>
+  <p style="margin: 0;"><strong>Response:</strong> TIX document metadata and content in JSON format.</p>
+</div>
+
+<br>
+
+<div style="border: 3px solid #ccc; padding: 10px; border-radius: 20px;">
+  <strong style="color: #00ff37ff; margin: 0;">POST /tix/download</strong>
+  <p style="margin: 0;"><strong>Description:</strong> Downloads a TIX document as a ZIP file using a specific TIX ID.</p>
+  <p style="margin: 0;"><strong>Request Body:</strong></p>
+  <ul style="margin: 0;">
+    <li style="margin: 0;"><strong>tix_id:</strong> The ID of the TIX document to download.</li>
+  </ul>
+  <p style="margin: 0;"><strong>Response:</strong> A downloadable ZIP file containing the TIX document.</p>
+</div>
+
+### Generation endpoints
+
+<div style="border: 3px solid #ccc; padding: 10px; border-radius: 20px;">
+  <strong style="color: #00ff37ff; margin: 0;">POST /vex_tix/generate</strong>
+  <p style="margin: 0;"><strong>Description:</strong> Generates VEX and TIX for a specific GitHub repository.</p>
+  <p style="margin: 0;"><strong>Request Body:</strong></p>
+  <ul style="margin: 0;">
+    <li style="margin: 0;"><strong>repository_url:</strong> The URL of the GitHub repository.</li>
+    <li style="margin: 0;"><strong>branch:</strong> The branch to analyze (optional).</li>
+    <li style="margin: 0;"><strong>commit_sha:</strong> Specific commit SHA to analyze (optional).</li>
+  </ul>
+  <p style="margin: 0;"><strong>Response:</strong> A downloadable ZIP file containing generated VEX and TIX documents.</p>
+</div>
+
+
+## License
+[GNU General Public License 3.0](https://www.gnu.org/licenses/gpl-3.0.html)
 
 <button class="btn js-toggle-dark-mode" style="
   position: fixed;
