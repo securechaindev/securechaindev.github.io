@@ -6,26 +6,30 @@ nav_order: 4
 
 # Local Deployment
 
-You can try **Secure Chain** tools backends in your local machine following the next steps.
+You can try **Secure Chain** tool in your local machine for development purposes following the next steps.
 
 ## Enviroment File
 
-The first you need is to create an enviroment `(.env)` file from this template:
+The first you need is to create an enviroment `(.env and .env.local)` file from this template:
+
 ```bash
 # For dockerized backend and database
 GRAPH_DB_URI='bolt://neo4j:7687'
-VULN_DB_URI='mongodb://mongoSecureChain:mongoSecureChain@mongodb:27017/admin'
-ALLOWED_ORIGINS='["http://securechain-gateway:8000"]'
-GATEWAY_ALLOWED_ORIGINS='["http://localhost:3000"]' # Change in production
+VULN_DB_URI='mongodb://mongoSecureChain:mongoSecureChain@mongo:27017/admin'
+DOCS_URL='/docs' # Comment this on production
+SERVICES_ALLOWED_ORIGINS='["http://securechain-gateway:8000"]'
+GATEWAY_ALLOWED_ORIGINS='["http://securechain-frontend"]'
+BACKEND_URL=http://securechain-gateway:8000
+NODE_ENV=development # Change to 'production' for production builds
 
 # Databases settings
-GRAPH_DB_USER='neo4j'
-GRAPH_DB_PASSWORD='neoSecureChain'
-VULN_DB_USER='mongoSecureChain'
-VULN_DB_PASSWORD='mongoSecureChain'
+GRAPH_DB_USER='neo4j' # Change in production
+GRAPH_DB_PASSWORD='neoSecureChain' # Change in production
+VULN_DB_USER='mongoSecureChain' # Change in production
+VULN_DB_PASSWORD='mongoSecureChain' # Change in production
 
 # Secrets for JWT
-SECURE='FALSE' # Set to True in production
+SECURE=False # Set to True in production
 ALGORITHM='your_preferred_algorithm'  # e.g., 'HS256'
 ACCESS_TOKEN_EXPIRE_MINUTES='access_token_expire_minutes'
 REFRESH_TOKEN_EXPIRE_DAYS='refresh_token_expire_days'
@@ -43,17 +47,25 @@ GITHUB_GRAPHQL_API_KEY='add_your_api_key'
 GIT_PYTHON_REFRESH='select_your option'
 GIT_CONFIG_SYSTEM='/dev/null'
 GIT_CONFIG_GLOBAL='/dev/null'
-GIT_LFS_SKIP_SMUDGE=1
+GIT_LFS_SKIP_SMUDGE='1'
 GIT_TEMPLATE_DIR=''
+```
+
+## Nginx configuration
+
+The second step is to create an Nginx configuration in the folder `nginx/templates/default.conf.template` following this template:
+
+```nginx
+
 ```
 
 ## Docker Deployment
 
-The second step only needs as requirements Docker with docker compose. 
+The third step only needs as requirements Docker with docker compose. 
 
 ### Docker Network
 
-Create a docker network wirh command:
+Create a docker network with command:
 ```bash
 docker network create securechain
 ```
@@ -72,6 +84,21 @@ The containerized databases will also be seeded automatically.
 To deploy all **Secure Chain** tools in your local machine as demo, all you need is run this the command `docker compose up --build` with the `.env` file and this docker compose file in the same folder:
 ```yml
 services:
+  securechain-frontend:
+    container_name: securechain-frontend
+    image: ghcr.io/securechaindev/securechain-frontend:latest
+    env_file:
+      - .env.local
+    ports:
+      - "80:80"
+    networks:
+      - securechain
+    depends_on:
+      securechain-gateway:
+        condition: service_healthy
+    volumes:
+      - ./nginx/templates:/etc/nginx/templates:ro
+
   securechain-gateway:
     container_name: securechain-gateway
     image: ghcr.io/securechaindev/securechain-gateway:latest
@@ -88,6 +115,11 @@ services:
         condition: service_healthy
       securechain-vexgen:
         condition: service_healthy
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
 
   securechain-auth:
     container_name: securechain-auth
