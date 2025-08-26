@@ -50,6 +50,64 @@ Secure Chain software architecture is based on microservices. The application is
 
 4. **Database Layer:** Each microservice uses its own dedicated database. *MongoDB* stores the vulnerability data, and *Neo4j* stores the software supply chain graph used by our tools to compute SSC degrees and analyze dependency relationships.
 
+## Secure Chain Graph Data Structure
+
+<div style="text-align: center;">
+  <img id="graph-structure-image" src="/assets/securechain/figs/graph_structure_light.png" alt="Secure Chain Graph Data Structure" width="500" />
+</div>
+
+Secure Chain represents the software supply chain as a **directed graph**, where each **node** and **relationship** encodes specific knowledge about packages, their versions, and their dependencies. This model allows deep reasoning about software composition, versioning, and risk propagation. The following documentation explains the components of this graph structure as illustrated in the architecture diagram.
+
+### Node: `Version`
+
+Represents a specific **version** of a software package. A version has the following attributes:
+- `mean`: A general risk or severity score (e.g., average CVSS score).
+- `name`: Full name or label of the version (e.g., `requests`).
+- `release_date`: The exact date this version was published.
+- `serial_number`: A sortable serial representation of the version (used to compare versions efficiently).
+- `vulnerabilities`: A list of known vulnerability identifiers (e.g., CVEs or OSV IDs) that affect this version.
+- `weighted_mean`: A weighted severity score, which considers not just the severity of vulnerabilities but also their reach or impact.
+
+This node is essential for understanding when a package version became available and whether it has known vulnerabilities or risks.
+
+### Node: `Dependency`
+
+Represents a **software package**, as it might appear in a dependency file (`package.json`, `requirements.txt`, `pom.xml`, `sbom.json` etc.). A Package has the following attributes:
+- `import_name`: The name used to import or reference the package in code (e.g., `lodash`, `express`).
+- `moment`: The point in time when this dependency was recorded or declared.
+- `name`: Canonical name of the dependency.
+- `repository_url`: URL to the source repository (GitHub, GitLab, Bitbucket, etc.).
+- `vendor`: The organization, maintainer, or vendor responsible for the package.
+
+Dependency nodes are the anchor points for packages in the ecosystem, and are linked to their actual released versions.
+
+### Package Types
+In the Secure Chain graph, `Dependency` nodes can represent different ecosystems. Some examples include:
+
+- **PyPIPackage** → Python ecosystem (Py Package Index)
+- **MavenPackage** → Java ecosystem (Maven Central)
+- **NPMPackage** → JavaScript ecosystem (Node Package Manager)
+- **NugetPackage** → .NET ecosystem (NuGet)
+- **RubyGemsPackage** → Ruby ecosystem (RubyGems)
+- **CargoPackage** → Rust ecosystem (Cargo Crates)
+
+Each of these package types follows the same general structure, but some ecosystems include additional attributes.
+
+#### Special Attributes for `MavenPackage`:
+Maven packages require additional fields to uniquely identify them:
+- `group_id`: The Maven group identifier (e.g., `org.apache.commons`).
+- `artifact_id`: The Maven artifact identifier (e.g., `commons-lang3`).
+
+These two fields combined (`group_id:artifact_id`) uniquely identify a Maven package in the ecosystem.
+
+### Relationship: `:HAVE`
+
+Connects a `Dependency` node to a specific `Version` node. This relationship indicates that a given package (Dependency) has a specific published version. It allows the graph to distinguish between the concept of a software package and its concrete realizations over time.
+
+### Relationship: `:REQUIRE`
+
+Connects a `Version` node to another `Dependency` node. This represents a dependency requirement (`constraints`) declared by a specific version of a package (`parent_version_name`).
+
 <button class="btn js-toggle-dark-mode" style="
   position: fixed;
   top: 1rem;
@@ -72,6 +130,7 @@ Secure Chain software architecture is based on microservices. The application is
     setTimeout(() => {
       const overview_img = document.getElementById('overview-image');
       const architecture_img = document.getElementById('architecture-image');
+      const graph_data_imp = document.getElementById('graph-data-image');
       const theme = jtd.getTheme();
       overview_img.src = theme === 'dark'
         ? '/assets/securechain/figs/overview_dark.png'
@@ -79,11 +138,15 @@ Secure Chain software architecture is based on microservices. The application is
       architecture_img.src = theme === 'dark'
         ? '/assets/securechain/figs/architecture_dark.png'
         : '/assets/securechain/figs/architecture_light.png';
+      graph_data_imp.src = theme === 'dark'
+        ? '/assets/securechain/figs/graph_structure_dark.png'
+        : '/assets/securechain/figs/graph_structure_light.png';
     }, 5);
   });
   document.addEventListener("DOMContentLoaded", function () {
     const overview_img = document.getElementById('overview-image');
     const architecture_img = document.getElementById('architecture-image');
+    const graph_data_imp = document.getElementById('graph-structure-image');
     const theme = jtd.getTheme();
     overview_img.src = theme === 'dark'
       ? '/assets/securechain/figs/overview_dark.png'
@@ -91,5 +154,8 @@ Secure Chain software architecture is based on microservices. The application is
     architecture_img.src = theme === 'dark'
       ? '/assets/securechain/figs/architecture_dark.png'
       : '/assets/securechain/figs/architecture_light.png';
+    graph_data_imp.src = theme === 'dark'
+      ? '/assets/securechain/figs/graph_structure_dark.png'
+      : '/assets/securechain/figs/graph_structure_light.png';
   });
 </script>
