@@ -130,7 +130,7 @@ Connects a `Version` node to another `Dependency` node. This represents a depend
     setTimeout(() => {
       const overview_img = document.getElementById('overview-image');
       const architecture_img = document.getElementById('architecture-image');
-      const graph_data_imp = document.getElementById('graph-data-image');
+      const graph_structure_img = document.getElementById('graph-structure-image');
       const theme = jtd.getTheme();
       overview_img.src = theme === 'dark'
         ? '/assets/securechain/figs/overview_dark.png'
@@ -138,7 +138,7 @@ Connects a `Version` node to another `Dependency` node. This represents a depend
       architecture_img.src = theme === 'dark'
         ? '/assets/securechain/figs/architecture_dark.png'
         : '/assets/securechain/figs/architecture_light.png';
-      graph_data_imp.src = theme === 'dark'
+      graph_structure_img.src = theme === 'dark'
         ? '/assets/securechain/figs/graph_structure_dark.png'
         : '/assets/securechain/figs/graph_structure_light.png';
     }, 5);
@@ -146,7 +146,7 @@ Connects a `Version` node to another `Dependency` node. This represents a depend
   document.addEventListener("DOMContentLoaded", function () {
     const overview_img = document.getElementById('overview-image');
     const architecture_img = document.getElementById('architecture-image');
-    const graph_data_imp = document.getElementById('graph-structure-image');
+    const graph_structure_img = document.getElementById('graph-structure-image');
     const theme = jtd.getTheme();
     overview_img.src = theme === 'dark'
       ? '/assets/securechain/figs/overview_dark.png'
@@ -154,7 +154,7 @@ Connects a `Version` node to another `Dependency` node. This represents a depend
     architecture_img.src = theme === 'dark'
       ? '/assets/securechain/figs/architecture_dark.png'
       : '/assets/securechain/figs/architecture_light.png';
-    graph_data_imp.src = theme === 'dark'
+    graph_structure_img.src = theme === 'dark'
       ? '/assets/securechain/figs/graph_structure_dark.png'
       : '/assets/securechain/figs/graph_structure_light.png';
   });
