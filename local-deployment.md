@@ -34,6 +34,17 @@ JWT_REFRESH_SECRET_KEY='your_refresh_secret_key'
 
 # Api key for github services
 GITHUB_GRAPHQL_API_KEY='add_your_api_key'
+
+# Git python environments
+# Git python refresh required env variable. Use one of the following values:
+# - quiet|q|silence|s|silent|none|n|0: for no message or exception
+# - warn|w|warning|log|l|1: for a warning message (logging level CRITICAL, displayed by default)
+# - error|e|exception|raise|r|2: for a raised exception
+GIT_PYTHON_REFRESH='select_your option'
+GIT_CONFIG_SYSTEM='/dev/null'
+GIT_CONFIG_GLOBAL='/dev/null'
+GIT_LFS_SKIP_SMUDGE=1
+GIT_TEMPLATE_DIR=''
 ```
 
 ## Docker Deployment
@@ -75,6 +86,23 @@ services:
         condition: service_healthy
       securechain-depex:
         condition: service_healthy
+      securechain-vexgen:
+        condition: service_healthy
+
+  securechain-auth:
+    container_name: securechain-auth
+    image: ghcr.io/securechaindev/securechain-auth:latest
+    env_file:
+      - .env
+    ports:
+      - '8000'
+    networks:
+      - securechain
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
 
   securechain-depex:
     container_name: securechain-depex
@@ -91,9 +119,9 @@ services:
       timeout: 3s
       retries: 5
 
-  securechain-auth:
-    container_name: securechain-auth
-    image: ghcr.io/securechaindev/securechain-auth:latest
+  securechain-vexgen:
+    container_name: securechain-vexgen
+    image: ghcr.io/securechaindev/securechain-vexgen:latest
     env_file:
       - .env
     ports:
