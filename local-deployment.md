@@ -19,8 +19,8 @@ VULN_DB_URI='mongodb://mongoSecureChain:mongoSecureChain@mongo:27017/admin'
 DOCS_URL='/docs' # Comment this on production
 SERVICES_ALLOWED_ORIGINS='["http://securechain-gateway:8000"]'
 GATEWAY_ALLOWED_ORIGINS='["http://securechain-frontend"]'
-BACKEND_URL=http://securechain-gateway:8000
-NODE_ENV=development # Change to 'production' for production builds
+BACKEND_URL='http://securechain-gateway:8000'
+NODE_ENV='development' # Change to 'production' for production builds
 
 # Databases settings
 GRAPH_DB_USER='neo4j' # Change in production
