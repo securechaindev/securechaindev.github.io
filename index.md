@@ -84,7 +84,7 @@ Dependency nodes are the anchor points for packages in the ecosystem, and are li
 ### Package Types
 In the Secure Chain graph, `Dependency` nodes can represent different ecosystems. Some examples include:
 
-- **PyPIPackage** → Python ecosystem (Py Package Index)
+- **PyPIPackage** → Python ecosystem (Python Package Index)
 - **MavenPackage** → Java ecosystem (Maven Central)
 - **NPMPackage** → JavaScript ecosystem (Node Package Manager)
 - **NugetPackage** → .NET ecosystem (NuGet)
