@@ -48,7 +48,7 @@ Secure Chain software architecture is based on microservices. The application is
 
 3. **Microservices Layer:** This layer consists of three separate microservices, all built with *FastAPI*. **Auth** manages authentication. **Depex** extracts and analyzes software dependencies from various package managers, and reason on dependency configurations. **VEXGen** generates vulnerability reports in VEX format.
 
-4. **Database Layer:** Each microservice uses its own dedicated database. *MongoDB* stores the vulnerability data, and *Neo4j* stores the software supply chain graph used by our tools to compute SSC degrees and analyze dependency relationships.
+4. **Database Layer:** The microservices are powered by two databases. *MongoDB* stores the vulnerability data, and *Neo4j* stores the software supply chain graph used by our tools to compute SSC degrees and analyze dependency relationships.
 
 ## Secure Chain Graph Data Structure
 
