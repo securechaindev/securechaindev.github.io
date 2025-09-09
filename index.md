@@ -73,7 +73,7 @@ This node is essential for understanding when a package version became available
 ### Node: `Dependency`
 
 Represents a **software package**, as it might appear in a dependency file (`package.json`, `requirements.txt`, `pom.xml`, `sbom.json` etc.). A Package has the following attributes:
-- `import_name`: The name used to import or reference the package in code (e.g., `lodash`, `express`).
+- `import_names`: The list of keywords used to import or reference the package in code (e.g., `lodash`, `express`).
 - `moment`: The point in time when this dependency was recorded or declared.
 - `name`: Canonical name of the dependency.
 - `repository_url`: URL to the source repository (GitHub, GitLab, Bitbucket, etc.).
