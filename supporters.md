@@ -1,7 +1,7 @@
 ---
 title: Supporting Entities
 parent: Secure Chain
-nav_order: 8
+nav_order: 9
 ---
 
 # Supporting Entities
