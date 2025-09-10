@@ -127,6 +127,8 @@ The project uses Python 3.13 and the dependencies are listed in `requirements.tx
   </ul>
 </div>
 
+<br>
+
 <div style="border: 3px solid #ccc; padding: 10px; border-radius: 20px;">
   <strong style="color: #8e5ca1ff; margin: 0;">TOOL: get_version_status</strong>
   <p style="margin: 0;"><strong>Description:</strong> Get the status of a specific version of a package in the dependency graph.</p>
@@ -138,6 +140,8 @@ The project uses Python 3.13 and the dependencies are listed in `requirements.tx
   </ul>
 </div>
 
+<br>
+
 <div style="border: 3px solid #ccc; padding: 10px; border-radius: 20px;">
   <strong style="color: #8e5ca1ff; margin: 0;">TOOL: get_vulnerability</strong>
   <p style="margin: 0;"><strong>Description:</strong> Get the information of a vulnerability by the ID.</p>
@@ -147,6 +151,8 @@ The project uses Python 3.13 and the dependencies are listed in `requirements.tx
   </ul>
 </div>
 
+<br>
+
 <div style="border: 3px solid #ccc; padding: 10px; border-radius: 20px;">
   <strong style="color: #8e5ca1ff; margin: 0;">TOOL: get_exploit</strong>
   <p style="margin: 0;"><strong>Description:</strong> Get the information of an exploit by the ID.</p>
@@ -155,6 +161,8 @@ The project uses Python 3.13 and the dependencies are listed in `requirements.tx
     <li style="margin: 0;"><strong>id:</strong> The ID of the exploit to look for.</li>
   </ul>
 </div>
+
+<br>
 
 <div style="border: 3px solid #ccc; padding: 10px; border-radius: 20px;">
   <strong style="color: #8e5ca1ff; margin: 0;">TOOL: get_cwe</strong>
