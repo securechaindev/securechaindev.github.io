@@ -16,6 +16,30 @@ An MCP server that provides tools for checking the status of your software suppl
 4. The Neo4J browser interface to visualize the graph built from the data is in [localhost:7474](http://0.0.0.0:7474/browser/) when the container is running.
 5. Python 3.13 or higher.
 
+## Use Secure Chain MCP with VSCode
+
+### 1. Register on Secure Chain
+
+Go to [Secure Chain](https://securechain.dev/) official lading page, and register yourself as a user.
+
+### 2. Add mcp configuration
+
+Finally, inside the folder `.vscode` add the file `mcp.json` with the next configuration, and start the mcp server:
+```json
+{
+  "servers": {
+    "Secure Chain MCP Server": {
+      "type": "http",
+      "url": "https://mcp.securechain.dev/mcp",
+      "headers": {
+        "X-Auth-Email": "your_email",
+        "X-Auth-Pass": "your_super_secret_password"
+      }
+    }
+  }
+}
+```
+
 ## Deployment with docker
 
 ### 1. Clone the repository
@@ -122,8 +146,20 @@ The project uses Python 3.13 and the dependencies are listed in `requirements.tx
   <p style="margin: 0;"><strong>Description:</strong> Check if a package exists and get its status in the dependency graph.</p>
   <p style="margin: 0;"><strong>Input:</strong></p>
   <ul style="margin: 0;">
-    <li style="margin: 0;"><strong>node_type:</strong> Type of node (PyPIPackage, NPMPackage, MavenPackage, CargoPackage, RubyGemsPackage, NuGetPackage).</li>
-    <li style="margin: 0;"><strong>package_name:</strong> Name of the package.</li>
+    <li><strong>node_type:</strong> Type of node (PyPIPackage, NPMPackage, MavenPackage, CargoPackage, RubyGemsPackage, NuGetPackage).</li>
+    <li><strong>package_name:</strong> Name of the package.</li>
+  </ul>
+</div>
+
+<br>
+
+<div style="border: 3px solid #ccc; padding: 10px; border-radius: 20px;">
+  <strong style="color: #8e5ca1ff; margin: 0;">TOOL: get_package_ssc</strong>
+  <p style="margin: 0;"><strong>Description:</strong> Check the direct and transitive software supply chain of a package in the dependency graph of the overall SSC.</p>
+  <p style="margin: 0;"><strong>Input:</strong></p>
+  <ul style="margin: 0;">
+    <li><strong>node_type:</strong> Type of node (PyPIPackage, NPMPackage, MavenPackage, CargoPackage, RubyGemsPackage, NuGetPackage).</li>
+    <li><strong>package_name:</strong> Name of the package.</li>
   </ul>
 </div>
 
@@ -134,9 +170,22 @@ The project uses Python 3.13 and the dependencies are listed in `requirements.tx
   <p style="margin: 0;"><strong>Description:</strong> Get the status of a specific version of a package in the dependency graph.</p>
   <p style="margin: 0;"><strong>Input:</strong></p>
   <ul style="margin: 0;">
-    <li style="margin: 0;"><strong>node_type:</strong> Type of node (PyPIPackage, NPMPackage, MavenPackage, CargoPackage, RubyGemsPackage, NuGetPackage).</li>
-    <li style="margin: 0;"><strong>package_name:</strong> Name of the package.</li>
-    <li style="margin: 0;"><strong>version_name:</strong> Name of the version.</li>
+    <li><strong>node_type:</strong> Type of node (PyPIPackage, NPMPackage, MavenPackage, CargoPackage, RubyGemsPackage, NuGetPackage).</li>
+    <li><strong>package_name:</strong> Name of the package.</li>
+    <li><strong>version_name:</strong> Name of the version.</li>
+  </ul>
+</div>
+
+<br>
+
+<div style="border: 3px solid #ccc; padding: 10px; border-radius: 20px;">
+  <strong style="color: #8e5ca1ff; margin: 0;">TOOL: get_version_ssc</strong>
+  <p style="margin: 0;"><strong>Description:</strong> Check the direct and transitive SSC of a version in the dependency graph of the overall SSC.</p>
+  <p style="margin: 0;"><strong>Input:</strong></p>
+  <ul style="margin: 0;">
+    <li><strong>node_type:</strong> Type of node (PyPIPackage, NPMPackage, MavenPackage, CargoPackage, RubyGemsPackage, NuGetPackage).</li>
+    <li><strong>package_name:</strong> Name of the package.</li>
+    <li><strong>version_name:</strong> Name of the version.</li>
   </ul>
 </div>
 
@@ -147,7 +196,29 @@ The project uses Python 3.13 and the dependencies are listed in `requirements.tx
   <p style="margin: 0;"><strong>Description:</strong> Get the information of a vulnerability by the ID.</p>
   <p style="margin: 0;"><strong>Input:</strong></p>
   <ul style="margin: 0;">
-    <li style="margin: 0;"><strong>id:</strong> The ID of the vulnerability to look for.</li>
+    <li><strong>vulnerability_id:</strong> The ID of the vulnerability to look for.</li>
+  </ul>
+</div>
+
+<br>
+
+<div style="border: 3px solid #ccc; padding: 10px; border-radius: 20px;">
+  <strong style="color: #8e5ca1ff; margin: 0;">TOOL: get_vulnerabilities_by_cwe</strong>
+  <p style="margin: 0;"><strong>Description:</strong> Get the information of vulnerabilities related to a CWE by the CWE-ID.</p>
+  <p style="margin: 0;"><strong>Input:</strong></p>
+  <ul style="margin: 0;">
+    <li><strong>cwe_id:</strong> The ID of the CWE to look for.</li>
+  </ul>
+</div>
+
+<br>
+
+<div style="border: 3px solid #ccc; padding: 10px; border-radius: 20px;">
+  <strong style="color: #8e5ca1ff; margin: 0;">TOOL: get_vulnerabilities_by_exploit</strong>
+  <p style="margin: 0;"><strong>Description:</strong> Get the information of vulnerabilities related to an exploit by the exploit ID.</p>
+  <p style="margin: 0;"><strong>Input:</strong></p>
+  <ul style="margin: 0;">
+    <li><strong>exploit_id:</strong> The ID of the exploit to look for.</li>
   </ul>
 </div>
 
@@ -158,7 +229,18 @@ The project uses Python 3.13 and the dependencies are listed in `requirements.tx
   <p style="margin: 0;"><strong>Description:</strong> Get the information of an exploit by the ID.</p>
   <p style="margin: 0;"><strong>Input:</strong></p>
   <ul style="margin: 0;">
-    <li style="margin: 0;"><strong>id:</strong> The ID of the exploit to look for.</li>
+    <li><strong>exploit_id:</strong> The ID of the exploit to look for.</li>
+  </ul>
+</div>
+
+<br>
+
+<div style="border: 3px solid #ccc; padding: 10px; border-radius: 20px;">
+  <strong style="color: #8e5ca1ff; margin: 0;">TOOL: get_exploits_by_vulnerability_id</strong>
+  <p style="margin: 0;"><strong>Description:</strong> Get the information of exploits related to a vulnerability ID.</p>
+  <p style="margin: 0;"><strong>Input:</strong></p>
+  <ul style="margin: 0;">
+    <li><strong>vulnerability_id:</strong> The ID of the vulnerability to look for associated exploits.</li>
   </ul>
 </div>
 
@@ -169,7 +251,31 @@ The project uses Python 3.13 and the dependencies are listed in `requirements.tx
   <p style="margin: 0;"><strong>Description:</strong> Get the information of a CWE by the ID.</p>
   <p style="margin: 0;"><strong>Input:</strong></p>
   <ul style="margin: 0;">
-    <li style="margin: 0;"><strong>id:</strong> The ID of the CWE to look for.</li>
+    <li><strong>cwe_id:</strong> The ID of the CWE to look for.</li>
+  </ul>
+</div>
+
+<br>
+
+<div style="border: 3px solid #ccc; padding: 10px; border-radius: 20px;">
+  <strong style="color: #8e5ca1ff; margin: 0;">TOOL: get_cwes_by_vulnerability_id</strong>
+  <p style="margin: 0;"><strong>Description:</strong> Get the information of CWEs related to a vulnerability ID.</p>
+  <p style="margin: 0;"><strong>Input:</strong></p>
+  <ul style="margin: 0;">
+    <li><strong>vulnerability_id:</strong> The ID of the vulnerability to look for associated CWEs.</li>
+  </ul>
+</div>
+
+<br>
+
+<div style="border: 3px solid #ccc; padding: 10px; border-radius: 20px;">
+  <strong style="color: #8e5ca1ff; margin: 0;">TOOL: get_vexs</strong>
+  <p style="margin: 0;"><strong>Description:</strong> Get the VEXs for a given repository owner and name.</p>
+  <p style="margin: 0;"><strong>Input:</strong></p>
+  <ul style="margin: 0;">
+    <li><strong>owner:</strong> The owner of the repository.</li>
+    <li><strong>name:</strong> The name of the repository.</li>
+    <li><strong>sbom_name:</strong> The name of the SBOM file.</li>
   </ul>
 </div>
 
