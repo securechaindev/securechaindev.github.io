@@ -39,6 +39,14 @@ JWT_REFRESH_SECRET_KEY='your_refresh_secret_key'
 # Api key for github services
 GITHUB_GRAPHQL_API_KEY='add_your_api_key'
 
+# Dockerized Redis Configuration (for Dagster integration)
+REDIS_HOST=redis
+REDIS_PORT=6379
+REDIS_DB=0
+REDIS_STREAM=package-extraction
+REDIS_GROUP=extractors
+REDIS_CONSUMER=package-consumer
+
 # Git python environments
 # Git python refresh required env variable. Use one of the following values:
 # - quiet|q|silence|s|silent|none|n|0: for no message or exception
@@ -252,6 +260,17 @@ services:
       timeout: 3s
       retries: 5
 
+  redis:
+    container_name: securechain-redis
+    image: redis:7-alpine
+    ports:
+      - '6379:6379'
+    volumes:
+      - redis-data:/data
+    networks:
+      - securechain
+    command: redis-server --appendonly yes
+
   securechain-vexgen:
     container_name: securechain-vexgen
     image: ghcr.io/securechaindev/securechain-vexgen:latest
@@ -272,6 +291,9 @@ networks:
     name: securechain
     external: true
     driver: bridge
+
+volumes:
+  redis-data:
 ```
 
 <button class="btn js-toggle-dark-mode" style="
