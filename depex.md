@@ -12,15 +12,14 @@ nav_order: 2
 
 ## What is Depex?
 
-**Depex** is a tool that allows you to reason over the entire configuration space of the Software Supply Chain of an open-source software repository.
+Depex is a tool that allows you to reason over the entire configuration space of the Software Supply Chain of an open-source software repository.
 
-**Depex** allows building complete dependency graphs from package manifests and analyzing them for security risks. It helps organizations and developers:
+### Key Features
 
-- Identify direct and transitive dependencies across multiple ecosystems (NPM, PyPI, Maven, Cargo Crates, Ruby Gems.)
-- Enrich dependency data with known vulnerabilities
-- Visualize and explore relationships using a Neo4j graph database
-- Audit software components for supply chain security
-- Support impact analysis and decision-making during vulnerability response
+- 🔍 **Multi-ecosystem support:** Analyzes Python, JavaScript, Ruby, Rust, Java, and PHP dependencies
+- 🧮 **SMT-based reasoning:** Uses Z3 solver to find optimal dependency configurations
+- 📊 **Graph analysis:** Visualize and query dependency graphs using Neo4j
+- ⚡ **High performance:** Async architecture with Redis caching for SSC ingestion with Dagster
 
 ## Development requirements
 
@@ -57,9 +56,9 @@ docker network create securechain
 ### 4. Databases containers
 
 For graphs and vulnerabilities information you need to download the zipped [data dumps](https://doi.org/10.5281/zenodo.16739081) from **Zenodo**. Once you have unzipped the dumps, inside the root folder run the command:
-'''bash
+```bash
 docker compose up --build
-'''
+```
 
 The containerized databases will also be seeded automatically.
 
@@ -72,37 +71,20 @@ docker compose -f dev/docker-compose.yml up --build
 ### 6. Access the application
 The API will be available at [http://localhost:8002](http://localhost:8002). You can access the API documentation at [http://localhost:8002/docs](http://localhost:8002/docs). Also, in [http://localhost:8001/docs](http://localhost:8001/docs) you can access the auth API documetation.
 
-## Python Environment
-The project uses Python 3.13 and the dependencies are listed in `requirements.txt`.
+### 7. Visualize the graph database
+Access Neo4j browser interface at [http://localhost:7474](http://localhost:7474/browser/) to visualize and query the dependency graphs.
 
-### Setting up the development environment
-
-1. **Create a virtual environment**:
-   ```bash
-   python3.13 -m venv depex-env
-   ```
-
-2. **Activate the virtual environment**:
-   ```bash
-   source depex-env/bin/activate
-   ```
-
-3. **Install dependencies**:
-   ```bash
-   pip install -r requirements.txt
-   ```
+### 8. Monitor databases
+- **MongoDB Compass:** Connect to MongoDB at `mongodb://localhost:27017` to browse documents
+- **Redis:** Connect to `localhost:6379` to monitor cache
 
 ## Endpoints Specification
 
 ### Graph endpoints
 
 <div style="border: 3px solid #ccc; padding: 10px; border-radius: 20px;">
-  <strong style="color: #00aaffff; margin: 0;">GET /graph/repositories/{user_id}</strong>
+  <strong style="color: #00aaffff; margin: 0;">GET /graph/repositories</strong>
   <p style="margin: 0;"><strong>Description:</strong> Retrieve a list of repositories for a specific user.</p>
-  <p style="margin: 0;"><strong>Path Parameters:</strong></p>
-  <ul style="margin: 0;">
-    <li style="margin: 0;"><strong>User ID:</strong> The ID of the user whose repositories to retrieve.</li>
-  </ul>
   <p style="margin: 0;"><strong>Response:</strong> List of user repositories</p>
 </div>
 
@@ -136,20 +118,6 @@ The project uses Python 3.13 and the dependencies are listed in `requirements.tx
 <br>
 
 <div style="border: 3px solid #ccc; padding: 10px; border-radius: 20px;">
-  <strong style="color: #00ff37ff; margin: 0;">POST /graph/version/init</strong>
-  <p style="margin: 0;"><strong>Description:</strong> Initialize a specific version into the graph.</p>
-  <p style="margin: 0;"><strong>Request Body:</strong></p>
-  <ul style="margin: 0;">
-    <li style="margin: 0;"><strong>Node Type:</strong> The type of package manager node.</li>
-    <li style="margin: 0;"><strong>Package Name:</strong> The name of the package.</li>
-    <li style="margin: 0;"><strong>Version Name:</strong> The name of the version.</li>
-  </ul>
-  <p style="margin: 0;"><strong>Response:</strong> Initialization of the version background extraction process.</p>
-</div>
-
-<br>
-
-<div style="border: 3px solid #ccc; padding: 10px; border-radius: 20px;">
   <strong style="color: #00ff37ff; margin: 0;">POST /graph/package/init</strong>
   <p style="margin: 0;"><strong>Description:</strong> Initialize a specific package into the graph.</p>
   <p style="margin: 0;"><strong>Request Body:</strong></p>
@@ -169,29 +137,57 @@ The project uses Python 3.13 and the dependencies are listed in `requirements.tx
   <ul style="margin: 0;">
     <li style="margin: 0;"><strong>Owner:</strong> The owner of the repository.</li>
     <li style="margin: 0;"><strong>Name:</strong> The name of the repository.</li>
-    <li style="margin: 0;"><strong>User ID:</strong> The ID of the user initializing the repository.</li>
   </ul>
   <p style="margin: 0;"><strong>Response:</strong> Initialization of the repository background extraction process.</p>
 </div>
 
-### File Operations endpoints
+### SSC Operations endpoints
 
 <div style="border: 3px solid #ccc; padding: 10px; border-radius: 20px;">
-  <strong style="color: #00ff37ff; margin: 0;">POST /operation/file/file_info</strong>
-  <p style="margin: 0;"><strong>Description:</strong> Retrieve information about a specific requirement file.</p>
+  <strong style="color: #00ff37ff; margin: 0;">POST /operation/scc/file_info</strong>
+  <p style="margin: 0;"><strong>Description:</strong> Retrieve Software Supply Chain information about a specific requirement file.</p>
   <p style="margin: 0;"><strong>Request Body:</strong></p>
   <ul style="margin: 0;">
-    <li style="margin: 0;"><strong>Requirement File ID:</strong> The ID of the requirement file where the config have been selected.</li>
+    <li style="margin: 0;"><strong>Requirement File ID:</strong> The ID of the requirement file from which its supply chain will be extracted.</li>
     <li style="margin: 0;"><strong>Max Level:</strong> The max level of depth in the graph.</li>
     <li style="margin: 0;"><strong>Node Type:</strong> The type of package manager node.</li>
   </ul>
-  <p style="margin: 0;"><strong>Response:</strong> Detailed requirement file information including direct and indirect dependencies.</p>
+  <p style="margin: 0;"><strong>Response:</strong> Detailed requirement file supply chain information including direct and indirect dependencies.</p>
 </div>
 
 <br>
 
 <div style="border: 3px solid #ccc; padding: 10px; border-radius: 20px;">
-  <strong style="color: #00ff37ff; margin: 0;">POST /operation/file/valid_graph</strong>
+  <strong style="color: #00ff37ff; margin: 0;">POST /operation/scc/package_info</strong>
+  <p style="margin: 0;"><strong>Description:</strong> Retrieve Software Supply Chain information about a specific package.</p>
+  <p style="margin: 0;"><strong>Request Body:</strong></p>
+  <ul style="margin: 0;">
+    <li style="margin: 0;"><strong>Package Name:</strong> The name of the package from which its supply chain will be extracted.</li>
+    <li style="margin: 0;"><strong>Max Level:</strong> The max level of depth in the graph.</li>
+    <li style="margin: 0;"><strong>Node Type:</strong> The type of package manager node.</li>
+  </ul>
+  <p style="margin: 0;"><strong>Response:</strong> Detailed package supply chain information including direct and indirect dependencies.</p>
+</div>
+
+<br>
+
+<div style="border: 3px solid #ccc; padding: 10px; border-radius: 20px;">
+  <strong style="color: #00ff37ff; margin: 0;">POST /operation/scc/version_info</strong>
+  <p style="margin: 0;"><strong>Description:</strong> Retrieve Software Supply Chain information about a specific version.</p>
+  <p style="margin: 0;"><strong>Request Body:</strong></p>
+  <ul style="margin: 0;">
+    <li style="margin: 0;"><strong>Package Name:</strong> The name of the parent package of the version.</li>
+    <li style="margin: 0;"><strong>Version Name:</strong> The name of the version from which its supply chain will be extracted.</li>
+    <li style="margin: 0;"><strong>Max Level:</strong> The max level of depth in the graph.</li>
+    <li style="margin: 0;"><strong>Node Type:</strong> The type of package manager node.</li>
+  </ul>
+  <p style="margin: 0;"><strong>Response:</strong> Detailed version supply chain information including direct and indirect dependencies.</p>
+</div>
+
+### SMT Operations endpoints
+
+<div style="border: 3px solid #ccc; padding: 10px; border-radius: 20px;">
+  <strong style="color: #00ff37ff; margin: 0;">POST /operation/smt/valid_graph</strong>
   <p style="margin: 0;"><strong>Description:</strong> Validate the graph of a requirement file up to a specified level.</p>
   <p style="margin: 0;"><strong>Request Body:</strong></p>
   <ul style="margin: 0;">
@@ -205,7 +201,7 @@ The project uses Python 3.13 and the dependencies are listed in `requirements.tx
 <br>
 
 <div style="border: 3px solid #ccc; padding: 10px; border-radius: 20px;">
-  <strong style="color: #00ff37ff; margin: 0;">POST /operation/file/minimize_impact</strong>
+  <strong style="color: #00ff37ff; margin: 0;">POST /operation/smt/minimize_impact</strong>
   <p style="margin: 0;"><strong>Description:</strong> Get the configurations with the minimized impact of a specific requirement file.</p>
   <p style="margin: 0;"><strong>Request Body:</strong></p>
   <ul style="margin: 0;">
@@ -221,7 +217,7 @@ The project uses Python 3.13 and the dependencies are listed in `requirements.tx
 <br>
 
 <div style="border: 3px solid #ccc; padding: 10px; border-radius: 20px;">
-  <strong style="color: #00ff37ff; margin: 0;">POST /operation/file/maximize_impact</strong>
+  <strong style="color: #00ff37ff; margin: 0;">POST /operation/smt/maximize_impact</strong>
   <p style="margin: 0;"><strong>Description:</strong> Get the configurations with the maximize impact of a specific requirement file.</p>
   <p style="margin: 0;"><strong>Request Body:</strong></p>
   <ul style="margin: 0;">
@@ -237,7 +233,7 @@ The project uses Python 3.13 and the dependencies are listed in `requirements.tx
 <br>
 
 <div style="border: 3px solid #ccc; padding: 10px; border-radius: 20px;">
-  <strong style="color: #00ff37ff; margin: 0;">POST /operation/file/filter_configs</strong>
+  <strong style="color: #00ff37ff; margin: 0;">POST /operation/smt/filter_configs</strong>
   <p style="margin: 0;"><strong>Description:</strong> Get the filtered configurations of a specific requirement file.</p>
   <p style="margin: 0;"><strong>Request Body:</strong></p>
   <ul style="margin: 0;">
@@ -252,10 +248,10 @@ The project uses Python 3.13 and the dependencies are listed in `requirements.tx
   <p style="margin: 0;"><strong>Response:</strong> Filtered configurations.</p>
 </div>
 
-### Configuration Operations endpoints
+<br>
 
 <div style="border: 3px solid #ccc; padding: 10px; border-radius: 20px;">
-  <strong style="color: #00ff37ff; margin: 0;">POST /operation/config/valid_config</strong>
+  <strong style="color: #00ff37ff; margin: 0;">POST /operation/smt/valid_config</strong>
   <p style="margin: 0;"><strong>Description:</strong> Validate the configuration based on a requirement file.</p>
   <p style="margin: 0;"><strong>Request Body:</strong></p>
   <ul style="margin: 0;">
@@ -271,7 +267,7 @@ The project uses Python 3.13 and the dependencies are listed in `requirements.tx
 <br>
 
 <div style="border: 3px solid #ccc; padding: 10px; border-radius: 20px;">
-  <strong style="color: #00ff37ff; margin: 0;">POST /operation/config/complete_config</strong>
+  <strong style="color: #00ff37ff; margin: 0;">POST /operation/smt/complete_config</strong>
   <p style="margin: 0;"><strong>Description:</strong> Complete a partial configuration.</p>
   <p style="margin: 0;"><strong>Request Body:</strong></p>
   <ul style="margin: 0;">
@@ -287,7 +283,7 @@ The project uses Python 3.13 and the dependencies are listed in `requirements.tx
 <br>
 
 <div style="border: 3px solid #ccc; padding: 10px; border-radius: 20px;">
-  <strong style="color: #00ff37ff; margin: 0;">POST /operation/config/config_by_impact</strong>
+  <strong style="color: #00ff37ff; margin: 0;">POST /operation/smt/config_by_impact</strong>
   <p style="margin: 0;"><strong>Description:</strong> Give a configuration based on impact.</p>
   <p style="margin: 0;"><strong>Request Body:</strong></p>
   <ul style="margin: 0;">
