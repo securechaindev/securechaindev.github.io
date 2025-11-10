@@ -23,47 +23,81 @@ Click the Fork button on GitHub and clone your copy:
 git clone https://github.com/your-username/tool-name.git
 ```
 
-### 2. Create a Branch
+### 2. Create a Local Enviroment
+
+The project uses Python 3.13 and **uv** as the package manager for faster and more reliable dependency management.
+
+#### Setting up the development environment with uv
+
+1. **Install uv** (if not already installed):
+   ```bash
+   curl -LsSf https://astral.sh/uv/install.sh | sh
+   ```
+
+2. **Install dependencies**:
+   ```bash
+   uv sync
+   ```
+
+3. **Activate the virtual environment** (uv creates it automatically):
+   ```bash
+   source .venv/bin/activate
+   ```
+
+### 3. Create a Branch
 
 Use a descriptive name:
 ```bash
 git checkout -b fix/missing-dependency-warning
 ```
 
-### 3. Make Changes
+### 4. Make Changes
 
 Focus on clarity and modularity. Each repository have a deployment guide in README.md to check your changes, but typically is running the command:
 ```bash
 docker compose -f dev/docker-compose.yml up --build
 ```
 
-### 4. Lint
+### 5. Lint & Code Quality
 
 The repositories support using **ruff** following PEP8 with command:
 ```bash
-ruff check app --fix
+# Install ruff
+uv sync -- extra dev
+# Linting
+uv ruff check app/
+
+# Formatting
+uv ruff format app/
 ```
 
-### 5. Run Tests
+### 6. Run Tests
 
-If the repository have a test folder you can install the test requirements with command:
 ```bash
-pip install -r tests/dev-requirement.txt
+# Install testing dependencies
+uv sync -- extra test
+
+# Run all tests
+uv run pytest
+
+# Run tests with coverage report
+uv run pytest --cov=app --cov-report=term-missing --cov-report=html
+
+# Run specific test file
+uv run pytest tests/unit/controllers/test_graph_controller.py -v
+
+# Run only unit tests
+uv run pytest tests/unit/ -v
 ```
 
-Then, you can run the tests with command
-```bash
-pytest tests/
-```
-
-### 6. Commit Changes
+### 7. Commit Changes
 
 Follow [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) when possible:
 ```bash
 git commit -m "fix: Warn on missing indirect imports"
 ```
 
-### 7. Push & Open Pull Request
+### 8. Push & Open Pull Request
 
 Once you have linted and tested your code you can push your changes:
 ```bash
