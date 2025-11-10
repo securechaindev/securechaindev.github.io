@@ -12,7 +12,14 @@ nav_order: 3
 
 ## What is VEXGen?
 
-VEXGen is a simple generating tool of Vulnerability Exploitability eXchange (VEX) and Thread Intelligence eXchange (TIX) files.
+**VEXGen** is an automated tool for generating **VEX (Vulnerability Exploitability eXchange)** and **TIX (Threat Intelligence eXchange)** documents from GitHub repositories.
+
+### Key Features
+
+- 🔍 **Automatic SBOM Discovery** - Finds and processes Software Bill of Materials files
+- 🧠 **Smart Code Analysis** - Multi-language analyzer detects actual component usage
+- 📊 **Vulnerability Assessment** - Determines exploitability using package affected artefacts
+- 📦 **VEX/TIX Generation** - Creates standards-compliant security documents
 
 ## Development requirements
 
@@ -48,7 +55,7 @@ docker network create securechain
 
 ### 4. Databases containers
 
-For graphs and vulnerabilities information you need to download the zipped [data dumps]() from Zenodo. Once you have unzipped the dumps, inside the root folder run the command:
+For graphs and vulnerabilities information you need to download the zipped [data dumps](https://doi.org/10.5281/zenodo.16739081) from Zenodo. Once you have unzipped the dumps, inside the root folder run the command:
 ```bash
 docker compose up --build
 ```
@@ -64,37 +71,13 @@ docker compose -f dev/docker-compose.yml up --build
 ### 6. Access the application
 The API will be available at [http://localhost:8002](http://localhost:8002). You can access the API documentation at [http://localhost:8002/docs](http://localhost:8002/docs). Also, in [http://localhost:8001/docs](http://localhost:8001/docs) you can access the auth API documetation.
 
-## Python Environment
-The project uses Python 3.13 and the dependencies are listed in `requirements.txt`.
-
-### Setting up the development environment
-
-1. **Create a virtual environment**:
-   ```bash
-   python3.13 -m venv vexgen-env
-   ```
-
-2. **Activate the virtual environment**:
-   ```bash
-   source vexgen-env/bin/activate
-   ```
-
-3. **Install dependencies**:
-   ```bash
-   pip install -r requirements.txt
-   ```
-
 ## Endpoints Specification
 
 ### Vulnerability Exploitybility eXchange (VEX) endpoints
 
 <div style="border: 3px solid #ccc; padding: 10px; border-radius: 20px;">
-  <strong style="color: #00aaffff; margin: 0;">GET /vex/user/{user_id}</strong>
+  <strong style="color: #00aaffff; margin: 0;">GET /vex/user</strong>
   <p style="margin: 0;"><strong>Description:</strong> Fetches all VEX documents associated with a specific user.</p>
-  <p style="margin: 0;"><strong>Path Parameters:</strong></p>
-  <ul style="margin: 0;">
-    <li style="margin: 0;"><strong>User ID:</strong> The ID of the user whose VEX documents to retrieve.</li>
-  </ul>
   <p style="margin: 0;"><strong>Response:</strong> List of VEX documents with metadata and JSON content.</p>
 </div>
 
@@ -113,11 +96,11 @@ The project uses Python 3.13 and the dependencies are listed in `requirements.tx
 <br>
 
 <div style="border: 3px solid #ccc; padding: 10px; border-radius: 20px;">
-  <strong style="color: #00ff37ff; margin: 0;">POST /vex/download</strong>
+  <strong style="color: #00aaffff; margin: 0;">GET /vex/download/{vex_id}</strong>
   <p style="margin: 0;"><strong>Description:</strong> Downloads a VEX document as a ZIP file using a specific VEX ID.</p>
-  <p style="margin: 0;"><strong>Request Body:</strong></p>
+  <p style="margin: 0;"><strong>Path Parameters:</strong></p>
   <ul style="margin: 0;">
-    <li style="margin: 0;"><strong>vex_id:</strong> The ID of the VEX document to download.</li>
+    <li style="margin: 0;"><strong>VEX ID:</strong> The ID of the VEX document to retrieve.</li>
   </ul>
   <p style="margin: 0;"><strong>Response:</strong> A downloadable ZIP file containing the VEX document.</p>
 </div>
@@ -125,12 +108,8 @@ The project uses Python 3.13 and the dependencies are listed in `requirements.tx
 ### Thread Intelligence eXchange (TIX) endpoints
 
 <div style="border: 3px solid #ccc; padding: 10px; border-radius: 20px;">
-  <strong style="color: #00aaffff; margin: 0;">GET /tix/user/{user_id}</strong>
+  <strong style="color: #00aaffff; margin: 0;">GET /tix/user</strong>
   <p style="margin: 0;"><strong>Description:</strong> Fetches all TIX documents associated with a specific user.</p>
-  <p style="margin: 0;"><strong>Path Parameters:</strong></p>
-  <ul style="margin: 0;">
-    <li style="margin: 0;"><strong>User ID:</strong> The ID of the user whose TIX documents to retrieve.</li>
-  </ul>
   <p style="margin: 0;"><strong>Response:</strong> List of TIX documents with metadata and JSON content.</p>
 </div>
 
@@ -149,11 +128,11 @@ The project uses Python 3.13 and the dependencies are listed in `requirements.tx
 <br>
 
 <div style="border: 3px solid #ccc; padding: 10px; border-radius: 20px;">
-  <strong style="color: #00ff37ff; margin: 0;">POST /tix/download</strong>
+  <strong style="color: #00aaffff; margin: 0;">GET /tix/download/{tix_id}</strong>
   <p style="margin: 0;"><strong>Description:</strong> Downloads a TIX document as a ZIP file using a specific TIX ID.</p>
-  <p style="margin: 0;"><strong>Request Body:</strong></p>
+  <p style="margin: 0;"><strong>Path Parameters:</strong></p>
   <ul style="margin: 0;">
-    <li style="margin: 0;"><strong>tix_id:</strong> The ID of the TIX document to download.</li>
+    <li style="margin: 0;"><strong>TIX ID:</strong> The ID of the TIX document to retrieve.</li>
   </ul>
   <p style="margin: 0;"><strong>Response:</strong> A downloadable ZIP file containing the TIX document.</p>
 </div>
@@ -165,9 +144,8 @@ The project uses Python 3.13 and the dependencies are listed in `requirements.tx
   <p style="margin: 0;"><strong>Description:</strong> Generates VEX and TIX for a specific GitHub repository.</p>
   <p style="margin: 0;"><strong>Request Body:</strong></p>
   <ul style="margin: 0;">
-    <li style="margin: 0;"><strong>repository_url:</strong> The URL of the GitHub repository.</li>
-    <li style="margin: 0;"><strong>branch:</strong> The branch to analyze (optional).</li>
-    <li style="margin: 0;"><strong>commit_sha:</strong> Specific commit SHA to analyze (optional).</li>
+    <li style="margin: 0;"><strong>owner:</strong> The owner of the GitHub repository.</li>
+    <li style="margin: 0;"><strong>name:</strong> The name of the GitHub repository.</li>
   </ul>
   <p style="margin: 0;"><strong>Response:</strong> A downloadable ZIP file containing generated VEX and TIX documents.</p>
 </div>
