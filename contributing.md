@@ -1,7 +1,7 @@
 ---
 title: Contributing
 parent: Secure Chain
-nav_order: 6
+nav_order: 7
 ---
 
 # Contributing to SecureChain
