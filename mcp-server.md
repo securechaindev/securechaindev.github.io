@@ -270,7 +270,20 @@ The project uses Python 3.13 and the dependencies are listed in `requirements.tx
 
 <div style="border: 3px solid #ccc; padding: 10px; border-radius: 20px;">
   <strong style="color: #8e5ca1ff; margin: 0;">TOOL: get_vexs</strong>
-  <p style="margin: 0;"><strong>Description:</strong> Get the VEXs for a given repository owner and name.</p>
+  <p style="margin: 0;"><strong>Description:</strong> Get the Vulnerability Exploitability eXchanges (VEXs) for a given repository owner and name.</p>
+  <p style="margin: 0;"><strong>Input:</strong></p>
+  <ul style="margin: 0;">
+    <li><strong>owner:</strong> The owner of the repository.</li>
+    <li><strong>name:</strong> The name of the repository.</li>
+    <li><strong>sbom_name:</strong> The name of the SBOM file.</li>
+  </ul>
+</div>
+
+<br>
+
+<div style="border: 3px solid #ccc; padding: 10px; border-radius: 20px;">
+  <strong style="color: #8e5ca1ff; margin: 0;">TOOL: get_tixs</strong>
+  <p style="margin: 0;"><strong>Description:</strong> Get the Threat Intelligence eXchanges (TIXs) for a given repository owner and name.</p>
   <p style="margin: 0;"><strong>Input:</strong></p>
   <ul style="margin: 0;">
     <li><strong>owner:</strong> The owner of the repository.</li>
