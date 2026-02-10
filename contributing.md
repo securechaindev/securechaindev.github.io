@@ -65,6 +65,7 @@ The repositories support using **ruff** following PEP8 with command:
 ```bash
 # Install ruff
 uv sync -- extra dev
+
 # Linting
 uv run ruff check app/
 
