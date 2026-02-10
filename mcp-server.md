@@ -8,6 +8,14 @@ nav_order: 4
 
 An MCP server that provides tools for checking the status of your software supply chain within the context of Secure Chain.
 
+### Key Features
+
+- 🔍 **Multi-ecosystem support:** Query packages from PyPI, NPM, Maven, Cargo, RubyGems, and NuGet ecosystems
+- 🛡️ **Vulnerability intelligence:** Access detailed vulnerability, exploit, and CWE information
+- 📊 **Supply chain analysis:** Explore direct and transitive dependencies in the software supply chain graph
+- 📋 **VEX support:** Retrieve Vulnerability Exploitability eXchange documents for repositories
+- ⚡ **MCP integration:** Seamlessly integrates with AI agents and LLMs via Model Context Protocol
+
 ## Development requirements
 
 1. [Docker](https://www.docker.com/) to deploy the tool.
