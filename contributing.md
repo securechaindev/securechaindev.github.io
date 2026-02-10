@@ -61,14 +61,15 @@ docker compose -f dev/docker-compose.yml up --build
 ### 5. Lint & Code Quality
 
 The repositories support using **ruff** following PEP8 with command:
+
 ```bash
 # Install ruff
 uv sync -- extra dev
 # Linting
-uv ruff check app/
+uv run ruff check app/
 
 # Formatting
-uv ruff format app/
+uv run ruff format app/
 ```
 
 ### 6. Run Tests
