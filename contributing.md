@@ -64,7 +64,7 @@ The repositories support using **ruff** following PEP8 with command:
 
 ```bash
 # Install ruff
-uv sync -- extra dev
+uv sync --extra dev
 
 # Linting
 uv run ruff check app/
@@ -77,7 +77,7 @@ uv run ruff format app/
 
 ```bash
 # Install testing dependencies
-uv sync -- extra test
+uv sync --extra test
 
 # Run all tests
 uv run pytest
