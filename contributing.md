@@ -96,7 +96,7 @@ uv run pytest tests/unit/ -v
 
 Follow [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) when possible:
 ```bash
-git commit -m "fix: Warn on missing indirect imports"
+git commit -m "fix: warn on missing indirect imports"
 ```
 
 ### 8. Push & Open Pull Request
