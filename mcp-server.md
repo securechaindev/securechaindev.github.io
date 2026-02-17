@@ -127,26 +127,6 @@ Inside the folder `.vscode/` add the file `mcp.json` with this template:
 
 And then start the MCP server and begin use it with Copilot for example.
 
-## Python Environment
-The project uses Python 3.13 and the dependencies are listed in `requirements.txt`.
-
-### Setting up the development environment
-
-1. **Create a virtual environment**:
-   ```bash
-   python3.13 -m venv depex-env
-   ```
-
-2. **Activate the virtual environment**:
-   ```bash
-   source depex-env/bin/activate
-   ```
-
-3. **Install dependencies**:
-   ```bash
-   pip install -r requirements.txt
-   ```
-
 ## Tools Specification
 
 <div style="border: 3px solid #ccc; padding: 10px; border-radius: 20px;">
