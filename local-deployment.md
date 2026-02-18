@@ -14,30 +14,30 @@ The first you need is to create an enviroment `(.env and .env.local)` file from 
 
 ```bash
 # For dockerized backend and database
-GRAPH_DB_URI='bolt://neo4j:7687'
-VULN_DB_URI='mongodb://mongoSecureChain:mongoSecureChain@mongo:27017/admin'
-DOCS_URL='/docs' # Comment this on production
-SERVICES_ALLOWED_ORIGINS='["http://securechain-gateway:8000"]'
-GATEWAY_ALLOWED_ORIGINS='["http://securechain-frontend"]'
-BACKEND_URL='http://securechain-gateway:8000'
-NODE_ENV='development' # Change to 'production' for production builds
+GRAPH_DB_URI=bolt://neo4j:7687
+VULN_DB_URI=mongodb://mongoSecureChain:mongoSecureChain@mongo:27017/admin
+DOCS_URL=/docs # Comment this on production
+SERVICES_ALLOWED_ORIGINS=["http://securechain-gateway:8000"]
+GATEWAY_ALLOWED_ORIGINS=["http://securechain-frontend"]
+BACKEND_URL=http://securechain-gateway:8000
+NODE_ENV=development # Change to production for production builds
 
 # Databases settings
-GRAPH_DB_USER='neo4j' # Change in production
-GRAPH_DB_PASSWORD='neoSecureChain' # Change in production
-VULN_DB_USER='mongoSecureChain' # Change in production
-VULN_DB_PASSWORD='mongoSecureChain' # Change in production
+GRAPH_DB_USER=neo4j # Change in production
+GRAPH_DB_PASSWORD=neoSecureChain # Change in production
+VULN_DB_USER=mongoSecureChain # Change in production
+VULN_DB_PASSWORD=mongoSecureChain # Change in production
 
 # Secrets for JWT
 SECURE=False # Set to True in production
-ALGORITHM='your_preferred_algorithm'  # e.g., 'HS256'
-ACCESS_TOKEN_EXPIRE_MINUTES='access_token_expire_minutes'
-REFRESH_TOKEN_EXPIRE_DAYS='refresh_token_expire_days'
-JWT_ACCESS_SECRET_KEY='your_access_secret_key'
-JWT_REFRESH_SECRET_KEY='your_refresh_secret_key'
+ALGORITHM=your_preferred_algorithm  # e.g., HS256
+ACCESS_TOKEN_EXPIRE_MINUTES=access_token_expire_minutes
+REFRESH_TOKEN_EXPIRE_DAYS=refresh_token_expire_days
+JWT_ACCESS_SECRET_KEY=your_access_secret_key
+JWT_REFRESH_SECRET_KEY=your_refresh_secret_key
 
 # Api key for github services
-GITHUB_GRAPHQL_API_KEY='add_your_api_key'
+GITHUB_GRAPHQL_API_KEY=add_your_api_key
 
 # Dockerized Redis Configuration (for Dagster integration)
 REDIS_HOST=redis
@@ -52,11 +52,11 @@ REDIS_CONSUMER=package-consumer
 # - quiet|q|silence|s|silent|none|n|0: for no message or exception
 # - warn|w|warning|log|l|1: for a warning message (logging level CRITICAL, displayed by default)
 # - error|e|exception|raise|r|2: for a raised exception
-GIT_PYTHON_REFRESH='select_your option'
-GIT_CONFIG_SYSTEM='/dev/null'
-GIT_CONFIG_GLOBAL='/dev/null'
-GIT_LFS_SKIP_SMUDGE='1'
-GIT_TEMPLATE_DIR=''
+GIT_PYTHON_REFRESH=select_your option
+GIT_CONFIG_SYSTEM=/dev/null
+GIT_CONFIG_GLOBAL=/dev/null
+GIT_LFS_SKIP_SMUDGE=1
+GIT_TEMPLATE_DIR=
 ```
 
 ## Nginx configuration
