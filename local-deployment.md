@@ -196,8 +196,7 @@ services:
   securechain-frontend:
     container_name: securechain-frontend
     image: ghcr.io/securechaindev/securechain-frontend:latest
-    env_file:
-      - .env
+    env_file: .env
     ports:
       - "80:80"
     networks:
@@ -211,8 +210,7 @@ services:
   securechain-gateway:
     container_name: securechain-gateway
     image: ghcr.io/securechaindev/securechain-gateway:latest
-    env_file:
-      - .env
+    env_file: .env
     ports:
       - '8000:8000'
     networks:
@@ -233,8 +231,7 @@ services:
   securechain-auth:
     container_name: securechain-auth
     image: ghcr.io/securechaindev/securechain-auth:latest
-    env_file:
-      - .env
+    env_file: .env
     ports:
       - '8000'
     networks:
@@ -248,8 +245,7 @@ services:
   securechain-depex:
     container_name: securechain-depex
     image: ghcr.io/securechaindev/securechain-depex:latest
-    env_file:
-      - .env
+    env_file: .env
     ports:
       - '8000'
     networks:
@@ -274,8 +270,7 @@ services:
   securechain-vexgen:
     container_name: securechain-vexgen
     image: ghcr.io/securechaindev/securechain-vexgen:latest
-    env_file:
-      - .env
+    env_file: .env
     ports:
       - '8000'
     networks:
