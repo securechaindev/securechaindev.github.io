@@ -10,7 +10,7 @@ You can try **Secure Chain** tool in your local machine for development purposes
 
 ## Enviroment File
 
-The first you need is to create an enviroment `(.env and .env.local)` file from this template:
+The first you need is to create an enviroment `(.env)` file from this template:
 
 ```bash
 # For dockerized backend and database
@@ -197,7 +197,7 @@ services:
     container_name: securechain-frontend
     image: ghcr.io/securechaindev/securechain-frontend:latest
     env_file:
-      - .env.local
+      - .env
     ports:
       - "80:80"
     networks:
